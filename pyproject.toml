@@ -8,4 +8,16 @@ version = "0.0.1"
 dependencies = ["typer"]
 
 [project.optional-dependencies]
-dev = []
+dev = ["isort", "black", "docformatter"]
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 88
+
+[tool.docformatter]
+in-place = true
+recursive = true
+black = true
+blank = true
