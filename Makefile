@@ -1,4 +1,4 @@
-default: fmt
+default: fmt lint
 
 # Dependencies Management
 lock:
@@ -16,3 +16,9 @@ fmt:
 	-isort app
 	-black app
 	-docformatter app
+
+lint:
+	-pyright app
+	-flake8 app
+	-autoflake app
+	-bandit -c pyproject.toml -q -r app
