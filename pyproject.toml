@@ -17,6 +17,7 @@ dev = [
     "flake8-pyproject",
     "autoflake",
     "bandit",
+    "pre-commit",
 ]
 
 [tool.isort]

@@ -3,16 +3,24 @@
 autoflake==2.3.1
 bandit==1.7.8
 black==24.4.2
+cfgv==3.4.0
+    # via pre-commit
 charset-normalizer==3.3.2
     # via docformatter
 click==8.1.7
     # via
     #   black
     #   typer
+distlib==0.3.8
+    # via virtualenv
 docformatter==1.7.5
+filelock==3.14.0
+    # via virtualenv
 flake8==7.0.0
     # via flake8-pyproject
 flake8-pyproject==1.2.3
+identify==2.5.36
+    # via pre-commit
 isort==5.13.2
 markdown-it-py==3.0.0
     # via rich
@@ -23,7 +31,9 @@ mdurl==0.1.2
 mypy-extensions==1.0.0
     # via black
 nodeenv==1.8.0
-    # via pyright
+    # via
+    #   pre-commit
+    #   pyright
 packaging==24.0
     # via black
 pathspec==0.12.1
@@ -31,7 +41,10 @@ pathspec==0.12.1
 pbr==6.0.0
     # via stevedore
 platformdirs==4.2.2
-    # via black
+    # via
+    #   black
+    #   virtualenv
+pre-commit==3.7.1
 pycodestyle==2.11.1
     # via flake8
 pyflakes==3.2.0
@@ -42,7 +55,9 @@ pygments==2.18.0
     # via rich
 pyright==1.1.363
 pyyaml==6.0.1
-    # via bandit
+    # via
+    #   bandit
+    #   pre-commit
 rich==13.7.1
     # via
     #   bandit
@@ -58,3 +73,5 @@ typing-extensions==4.11.0
     # via typer
 untokenize==0.1.1
     # via docformatter
+virtualenv==20.26.2
+    # via pre-commit
