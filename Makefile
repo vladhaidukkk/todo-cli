@@ -23,12 +23,12 @@ sync-dev:
 
 # Code Formatting & Linting
 fmt:
-	-isort app
-	-black app
-	-docformatter app
+	-isort todo
+	-black todo
+	-docformatter todo
 
 lint:
-	-pyright app
-	-flake8 app
-	-autoflake app
-	-bandit -c pyproject.toml -q -r app
+	-pyright todo
+	-flake8 todo
+	-autoflake todo
+	-bandit -c pyproject.toml -q -r todo

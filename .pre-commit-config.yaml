@@ -3,49 +3,49 @@ repos:
     hooks:
       - id: isort
         name: isort
-        entry: isort --check app
+        entry: isort --check todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: black
         name: black
-        entry: black --check app
+        entry: black --check todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: docformatter
         name: docformatter
-        entry: docformatter --check app
+        entry: docformatter --check todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: pyright
         name: pyright
-        entry: pyright app
+        entry: pyright todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: flake8
         name: flake8
-        entry: flake8 app
+        entry: flake8 todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: autoflake
         name: autoflake
-        entry: autoflake app
+        entry: autoflake todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]
 
       - id: bandit
         name: bandit
-        entry: bandit -c pyproject.toml -q -r app
+        entry: bandit -c pyproject.toml -q -r todo
         language: system
         types: [ python ]
         stages: [ pre-commit ]

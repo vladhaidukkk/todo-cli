@@ -22,7 +22,7 @@ dev = [
 ]
 
 [project.scripts]
-todo = "app.main:app"
+todo = "todo.main:app"
 
 [tool.isort]
 profile = "black"
