@@ -1,5 +1,15 @@
 default: fmt lint
 
+# CLI Management
+init:
+	uv pip install .
+
+init-dev:
+	uv pip install -e .
+
+build:
+	python -m build
+
 # Dependencies Management
 lock:
 	uv pip compile pyproject.toml -o requirements.txt

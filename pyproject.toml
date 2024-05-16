@@ -9,6 +9,7 @@ dependencies = ["typer"]
 
 [project.optional-dependencies]
 dev = [
+    "build",
     "isort",
     "black",
     "docformatter",
@@ -19,6 +20,9 @@ dev = [
     "bandit",
     "pre-commit",
 ]
+
+[project.scripts]
+todo = "app.main:app"
 
 [tool.isort]
 profile = "black"

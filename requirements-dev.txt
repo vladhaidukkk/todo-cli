@@ -3,6 +3,7 @@
 autoflake==2.3.1
 bandit==1.7.8
 black==24.4.2
+build==1.2.1
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
@@ -35,7 +36,9 @@ nodeenv==1.8.0
     #   pre-commit
     #   pyright
 packaging==24.0
-    # via black
+    # via
+    #   black
+    #   build
 pathspec==0.12.1
     # via black
 pbr==6.0.0
@@ -53,6 +56,8 @@ pyflakes==3.2.0
     #   flake8
 pygments==2.18.0
     # via rich
+pyproject-hooks==1.1.0
+    # via build
 pyright==1.1.363
 pyyaml==6.0.1
     # via
