@@ -22,3 +22,23 @@ Our `pyproject.toml` includes settings for:
 - **Build System**: Specifies instructions on how to build our project.
 - **Tool Configurations**: Settings for various tools such as `black`, `flake8`, and others to ensure
   consistency.
+
+## Project Commands
+
+We use a [Makefile](https://makefiletutorial.com) to help us quickly do common tasks without
+having to remember complex commands.
+
+### What is a Makefile?
+
+A `Makefile` defines a series of commands and provides aliases (or simple names) for them. By using these aliases with
+the `make` command, we can quickly and effectively perform routine project tasks without remembering and typing out long
+series of commands.
+
+### How to Use It
+
+To run a command from the `Makefile`, open your terminal, go to the project's main folder, and type `make` followed by
+the command name. Here's an example:
+
+```shell
+make fmt
+```
