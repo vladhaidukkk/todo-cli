@@ -26,22 +26,24 @@ In this file, we include:
 
 ## Project Tasks
 
-We use a [Makefile](https://makefiletutorial.com) to describe common tasks for managing the project and assign short
-aliases to them.
+We use [just](https://just.systems/man/en/) with its `Justfile` to describe and execute common project tasks. It's a
+modern alternative to `make` and its [Makefile](https://makefiletutorial.com), offering a range of useful features,
+such as the ability to pass arguments to tasks.
 
-### What's a Makefile?
+### What's a `Justfile`
 
-A `Makefile` lets us write down commands we run often and give them short names. This makes our work faster and less  
-error-prone because we don't have to type out long commands.
+A `Justfile` is a special file for the `just` utility that allows us to write down frequently used commands and assign
+them short names. This makes our work faster and less error-prone, as we no longer need to type out long commands.
 
-### How to Use It
+### How to Use `just`
 
-If you need to run a command from the `Makefile`, just do this:
+If you need to run a task from the `Justfile`, just do this:
 
 1. Open your terminal.
-2. Go to the root directory of the project.
-3. Type `make` and the name of the task you want to do. For example, to format your code, type:
+2. Type `just` and the name of the task you want to execute. For example, to format your code, type:
 
-```shell  
-make fmt
+```shell
+just fmt
 ```
+
+> **NOTE:** `just`, unlike `make`, allows you to execute tasks from any directory within the project.
