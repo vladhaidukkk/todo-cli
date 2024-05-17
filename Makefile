@@ -7,6 +7,9 @@ init:
 init-dev:
 	uv pip install -e .
 
+gen-doc:
+	typer todo.main utils docs --name todo --title "Usage Guide for Todo CLI" --output docs/USAGE_GUIDE.md
+
 build:
 	python -m build
 
