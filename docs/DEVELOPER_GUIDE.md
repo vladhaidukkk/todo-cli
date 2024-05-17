@@ -1,44 +1,47 @@
 # Developer Guide for Todo CLI
 
+This guide will help you understand how we set up and manage this project.
+
 ## Project Configuration
 
-We use the `pyproject.toml` file to manage all configurations in our project whenever possible. This file
-centralizes and standardizes the management of project settings, streamlining the configuration process.
+We use a `pyproject.toml` file to centralize all our project settings. This ensures consistent configuration for
+everyone working on the project, all in a single file.
 
-### Why Use `pyproject.toml`?
+### Why We Like `pyproject.toml`
 
-Using `pyproject.toml` for our configurations has several advantages:
+The `pyproject.toml` file is great for a few reasons:
 
-- **Centralization**: It keeps all configuration settings in just one file.
-- **Standardization**: This method is recommended by [PEP 621](https://peps.python.org/pep-0621/) and is becoming the
-  norm in the Python community.
-- **Compatibility**: Many Python tools can already use this file, which makes things simpler.
+- **Everything in One Place**: All the settings are in one file.
+- **Follows Best Practices**: It's not another way to configure a project, but the recommended way (
+  see [PEP 621](https://peps.python.org/pep-0621/)).
+- **Works Well with Most Tools**: It's compatible with many tools that Python developers use, making our lives easier.
 
-### What We Configure in `pyproject.toml`
+### What’s in `pyproject.toml`
 
-Our `pyproject.toml` includes settings for:
+In this file, we include:
 
-- **Dependencies Management**: Defines both runtime and development dependencies.
-- **Build System**: Specifies instructions on how to build our project.
-- **Tool Configurations**: Settings for various tools such as `black`, `flake8`, and others to ensure
-  consistency.
+- **Dependencies**: Lists both runtime and development dependencies our project relies on.
+- **Build System**: Instructions on how to build our project.
+- **Tool Configurations**: Settings for various tools such as `black`, `flake8`, etc.
 
-## Project Commands
+## Project Tasks
 
-We use a [Makefile](https://makefiletutorial.com) to help us quickly do common tasks without
-having to remember complex commands.
+We use a [Makefile](https://makefiletutorial.com) to describe common tasks for managing the project and assign short
+aliases to them.
 
-### What is a Makefile?
+### What's a Makefile?
 
-A `Makefile` defines a series of commands and provides aliases (or simple names) for them. By using these aliases with
-the `make` command, we can quickly and effectively perform routine project tasks without remembering and typing out long
-series of commands.
+A `Makefile` lets us write down commands we run often and give them short names. This makes our work faster and less  
+error-prone because we don't have to type out long commands.
 
 ### How to Use It
 
-To run a command from the `Makefile`, open your terminal, go to the project's main folder, and type `make` followed by
-the command name. Here's an example:
+If you need to run a command from the `Makefile`, just do this:
 
-```shell
+1. Open your terminal.
+2. Go to the root directory of the project.
+3. Type `make` and the name of the task you want to do. For example, to format your code, type:
+
+```shell  
 make fmt
 ```
