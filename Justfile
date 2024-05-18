@@ -34,6 +34,15 @@ sync:
 sync-dev:
 	uv pip sync requirements-dev.txt
 
+list:
+    uv pip list
+
+info pkg:
+    uv pip show {{pkg}}
+
+health:
+    uv pip check
+
 # Code Formatting & Linting
 fmt:
 	-isort todo

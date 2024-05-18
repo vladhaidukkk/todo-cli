@@ -73,7 +73,24 @@ to achieve two main goals:
 
 By following these steps, we help our project stay stable and efficient.
 
-#### Adding Dependencies
+#### Install Dependencies
+
+To install all the runtime dependencies, use the `sync` command:
+
+```shell
+just sync
+```
+
+For including dev dependencies as well, use the `sync-dev` command:
+
+```shell
+just sync-dev
+```
+
+Both commands will remove any unnecessary dependencies from your virtual environment and install the required ones,
+keeping your setup clean and efficient.
+
+#### Add Dependencies
 
 To add a new dependency to the project, follow these steps:
 
@@ -109,7 +126,7 @@ To add a new dependency to the project, follow these steps:
 At the end, you should have added a new dependency without having any compatibility issues or surprises with future
 updates.
 
-#### Updating Dependencies
+#### Update Dependencies
 
 To update the locked dependencies to their highest possible versions according to the constraints in
 the `pyproject.toml`, use the following command:
@@ -147,3 +164,32 @@ To upgrade dependency beyond current constraints, follow these steps:
    ```shell
    just lock-up
    ```
+
+#### Remove Dependencies
+
+To remove a dependency, simply delete its entry from the `pyproject.toml` file and refresh the lock file with the
+following command:
+
+```shell
+just lock
+```
+
+#### Other Commands
+
+To view a list of all installed dependencies, execute the following command:
+
+```shell
+just list
+```
+
+For detailed information on a specific dependency, use:
+
+```shell
+just info <package-name>
+```
+
+To check health of the project's dependencies, run:
+
+```shell
+just health
+```
