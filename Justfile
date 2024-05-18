@@ -14,9 +14,19 @@ build:
 	python -m build
 
 # Dependencies Management
+try pkg:
+    uv pip install --dry-run {{pkg}}
+
+rm pkg:
+    uv pip uninstall {{pkg}}
+
 lock:
 	uv pip compile pyproject.toml -o requirements.txt
 	uv pip compile pyproject.toml --extra dev -o requirements-dev.txt
+
+lock-up:
+	uv pip compile pyproject.toml --upgrade -o requirements.txt
+	uv pip compile pyproject.toml --extra dev --upgrade -o requirements-dev.txt
 
 sync:
 	uv pip sync requirements.txt
