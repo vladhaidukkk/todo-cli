@@ -5,7 +5,35 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "todo-cli"
 version = "0.0.1"
+description = "Manage your daily tasks directly from your terminal"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Vlad Haiduk", email = "the.vladhaiduk@gmail.com" },
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.9"
 dependencies = ["typer>=0.12.3,<0.13.0"]
+
+[project.urls]
+Repository = "https://github.com/vladhaidukkk/todo-cli"
 
 [project.optional-dependencies]
 dev = [
