@@ -18,6 +18,10 @@ This guide will help you understand how we set up and manage this project.
         - [Update Dependencies](#update-dependencies)
         - [Remove Dependencies](#remove-dependencies)
         - [Other Commands](#other-commands)
+- [Code Style](#code-style)
+    - [Formatting](#formatting)
+    - [Linting](#linting)
+    - [Exclusions](#exclusions)
 
 ## Project Configuration
 
@@ -30,7 +34,7 @@ The `pyproject.toml` file is great for a few reasons:
 
 - **Everything in One Place**: All the settings are in one file.
 - **Follows Best Practices**: It's not another way to configure a project, but the recommended way (
-  see [PEP 621](https://peps.python.org/pep-0621/)).
+  see [PEP621](https://peps.python.org/pep-0621/)).
 - **Works Well with Most Tools**: It's compatible with many tools that Python developers use, making our lives easier.
 
 ### What’s in `pyproject.toml`
@@ -210,3 +214,66 @@ To check health of the project's dependencies, run:
 ```shell
 just health
 ```
+
+## Code Style
+
+Our project uses a series of tools to format and lint our code, ensuring it follows best practices and remains clean
+and readable. Below is a detailed guide on the formatting & linting standards we follow and the tools we use.
+
+### Formatting
+
+According to [PEP8](https://peps.python.org/pep-0008/), Python code has specific style guidelines which, while not
+mandatory, are strongly recommended to maintain readability and consistency. Following these guidelines helps anyone who
+reads the code to easily understand it.
+
+We utilize a set of automated tools to handle code formatting so that developers can focus more on coding rather than
+style nuances. These tools include:
+
+- **[Black](https://github.com/psf/black)**: Automatically formats Python code to align with PEP8 guidelines.
+- **[isort](https://pycqa.github.io/isort/)**: Neatly sorts and organizes our imports to keep them clean and readable.
+- **[docformatter](https://github.com/PyCQA/docformatter)**: Standardizes the format of docstrings throughout our
+  codebase.
+
+These tools are configured in the `pyproject.toml` file, making them compatible with each other.
+
+To format the whole codebase, simply run:
+
+```shell
+just fmt
+```
+
+### Linting
+
+Linting is the process of running a program that checks for code errors, style issues, and potential bugs. Using linting
+tools ensures that the code not only looks good but is also free from common coding errors that could lead to bugs.
+
+To maintain high code quality, we use the following linting tools:
+
+- **[Pyright](https://github.com/microsoft/pyright)**: A fast and precise static type checker for Python, helping to
+  catch type errors before runtime.
+- **[Flake8](https://flake8.pycqa.org/en/latest/)**: Checks code for best practices and styling errors.
+- **[autoflake](https://github.com/PyCQA/autoflake)**: Removes unused imports and variables to declutter the code.
+- **[Bandit](https://bandit.readthedocs.io/en/latest/)**: Searches for common security issues in Python code,
+  prioritizing the safety of our codebase.
+
+All linting configurations are included in our project’s `pyproject.toml` file, making them compatible with each other
+as well as with formatting tools.
+
+To lint your codebase, just run the following command:
+
+```shell
+just lint
+```
+
+### Exclusions
+
+In cases where you're confident your code should appear as you've written it, but certain tools are reporting violations
+of their rules, you can ignore them for specific code lines or exclude entire files/directories.
+
+These tools typically provide special comments to ignore specific code lines, as well as configuration options to
+exclude files and directories. For example, `isort` offers a range of
+useful [action comments](https://pycqa.github.io/isort/docs/configuration/action_comments.html) for special cases.
+
+However, you should avoid relying on ignoring or excluding. Use these options only in exceptional circumstances.
+
+> **TIP**: To see which files a tool checks, run it in verbose mode.
