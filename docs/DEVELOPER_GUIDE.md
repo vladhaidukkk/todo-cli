@@ -2,6 +2,23 @@
 
 This guide will help you understand how we set up and manage this project.
 
+## Table of Contents
+
+- [Project Configuration](#project-configuration)
+    - [Why We Like `pyproject.toml`](#why-we-like-pyprojecttoml)
+    - [What’s in `pyproject.toml`](#whats-in-pyprojecttoml)
+- [Project Tasks](#project-tasks)
+    - [What's a `Justfile`](#whats-a-justfile)
+    - [How to Use `just`](#how-to-use-just)
+- [Dependencies Management](#dependencies-management)
+    - [Dependency Types](#dependency-types)
+    - [Management Workflow](#management-workflow)
+        - [Install Dependencies](#install-dependencies)
+        - [Add Dependencies](#add-dependencies)
+        - [Update Dependencies](#update-dependencies)
+        - [Remove Dependencies](#remove-dependencies)
+        - [Other Commands](#other-commands)
+
 ## Project Configuration
 
 We use a `pyproject.toml` file to centralize all our project settings. This ensures consistent configuration for
