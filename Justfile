@@ -13,6 +13,9 @@ gen-doc:
 build:
 	python -m build
 
+publish-test:
+    twine upload --verbose -r testpypi dist/*
+
 # Dependencies Management
 try pkg:
     uv pip install --dry-run {{pkg}}

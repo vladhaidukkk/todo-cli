@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "todo-cli"
+name = "todo-cli-vh"
 version = "0.0.1"
 description = "Manage your daily tasks directly from your terminal"
 readme = "README.md"
@@ -38,6 +38,7 @@ Repository = "https://github.com/vladhaidukkk/todo-cli"
 [project.optional-dependencies]
 dev = [
     "build",
+    "twine",
     "isort",
     "black",
     "docformatter",

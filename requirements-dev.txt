@@ -4,10 +4,14 @@ autoflake==2.3.1
 bandit==1.7.8
 black==24.4.2
 build==1.2.1
+certifi==2024.2.2
+    # via requests
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
-    # via docformatter
+    # via
+    #   docformatter
+    #   requests
 click==8.1.7
     # via
     #   black
@@ -15,6 +19,8 @@ click==8.1.7
 distlib==0.3.8
     # via virtualenv
 docformatter==1.7.5
+docutils==0.21.2
+    # via readme-renderer
 filelock==3.14.0
     # via virtualenv
 flake8==7.0.0
@@ -22,15 +28,33 @@ flake8==7.0.0
 flake8-pyproject==1.2.3
 identify==2.5.36
     # via pre-commit
+idna==3.7
+    # via requests
+importlib-metadata==7.1.0
+    # via twine
 isort==5.13.2
+jaraco-classes==3.4.0
+    # via keyring
+jaraco-context==5.3.0
+    # via keyring
+jaraco-functools==4.0.1
+    # via keyring
+keyring==25.2.1
+    # via twine
 markdown-it-py==3.0.0
     # via rich
 mccabe==0.7.0
     # via flake8
 mdurl==0.1.2
     # via markdown-it-py
+more-itertools==10.2.0
+    # via
+    #   jaraco-classes
+    #   jaraco-functools
 mypy-extensions==1.0.0
     # via black
+nh3==0.2.17
+    # via readme-renderer
 nodeenv==1.8.0
     # via
     #   pre-commit
@@ -43,6 +67,8 @@ pathspec==0.12.1
     # via black
 pbr==6.0.0
     # via stevedore
+pkginfo==1.10.0
+    # via twine
 platformdirs==4.2.2
     # via
     #   black
@@ -55,7 +81,9 @@ pyflakes==3.2.0
     #   autoflake
     #   flake8
 pygments==2.18.0
-    # via rich
+    # via
+    #   readme-renderer
+    #   rich
 pyproject-hooks==1.1.0
     # via build
 pyright==1.1.363
@@ -63,9 +91,20 @@ pyyaml==6.0.1
     # via
     #   bandit
     #   pre-commit
+readme-renderer==43.0
+    # via twine
+requests==2.31.0
+    # via
+    #   requests-toolbelt
+    #   twine
+requests-toolbelt==1.0.0
+    # via twine
+rfc3986==2.0.0
+    # via twine
 rich==13.7.1
     # via
     #   bandit
+    #   twine
     #   typer
 setuptools==69.5.1
     # via nodeenv
@@ -73,10 +112,17 @@ shellingham==1.5.4
     # via typer
 stevedore==5.2.0
     # via bandit
+twine==5.1.0
 typer==0.12.3
 typing-extensions==4.11.0
     # via typer
 untokenize==0.1.1
     # via docformatter
+urllib3==2.2.1
+    # via
+    #   requests
+    #   twine
 virtualenv==20.26.2
     # via pre-commit
+zipp==3.18.2
+    # via importlib-metadata
