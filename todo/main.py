@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from typing import Annotated
 
@@ -8,7 +9,13 @@ app = Typer(no_args_is_help=True)
 
 
 def get_data_dir() -> Path:
-    data_home = os.environ.get("XDG_DATA_HOME", "~/.local/share")
+    is_win = sys.platform.startswith("win")
+    data_home = (
+        os.environ.get("LOCALAPPDATA", "~")
+        if is_win
+        else os.environ.get("XDG_DATA_HOME", "~/.local/share")
+    )
+    # TODO: get `todo` dynamically, based on the `pyproject.toml`
     return Path(f"{data_home}/todo").expanduser()
 
 
