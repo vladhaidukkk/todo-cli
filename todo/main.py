@@ -5,6 +5,8 @@ from typing import Annotated
 
 from typer import Argument, Typer
 
+NAME = "todo"
+
 app = Typer(no_args_is_help=True)
 
 
@@ -15,8 +17,7 @@ def get_data_dir() -> Path:
         if is_win
         else os.environ.get("XDG_DATA_HOME", "~/.local/share")
     )
-    # TODO: get `todo` dynamically, based on the `pyproject.toml`
-    return Path(f"{data_home}/todo").expanduser()
+    return Path(f"{data_home}/{NAME}").expanduser()
 
 
 @app.callback()

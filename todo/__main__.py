@@ -1,3 +1,3 @@
-from .main import app
+from .main import NAME, app
 
-app(prog_name="todo")
+app(prog_name=NAME)
