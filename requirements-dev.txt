@@ -110,12 +110,15 @@ setuptools==69.5.1
     # via nodeenv
 shellingham==1.5.4
     # via typer
+sqlalchemy==2.0.30
 stevedore==5.2.0
     # via bandit
 twine==5.1.0
 typer==0.12.3
 typing-extensions==4.11.0
-    # via typer
+    # via
+    #   sqlalchemy
+    #   typer
 untokenize==0.1.1
     # via docformatter
 urllib3==2.2.1

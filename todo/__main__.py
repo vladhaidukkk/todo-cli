@@ -1,3 +1,4 @@
-from .main import NAME, app
+from .config import config
+from .main import app
 
-app(prog_name=NAME)
+app(prog_name=config.cli_name)

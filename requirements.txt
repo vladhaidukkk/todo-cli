@@ -12,6 +12,9 @@ rich==13.7.1
     # via typer
 shellingham==1.5.4
     # via typer
+sqlalchemy==2.0.30
 typer==0.12.3
 typing-extensions==4.11.0
-    # via typer
+    # via
+    #   sqlalchemy
+    #   typer
