@@ -1,21 +1,22 @@
 import os
 import sys
 import tomllib
-from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 
+from pydantic import BaseModel, computed_field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-@dataclass(frozen=True)
-class Config:
+
+class Config(BaseModel):
     pass
 
 
-@dataclass(frozen=True)
-class Settings:
+class Settings(BaseSettings):
     cli_name: str = "todo"
     is_win: bool = sys.platform.startswith("win")
 
+    @computed_field
     @cached_property
     def data_dir(self) -> Path:
         data_home = (
@@ -25,14 +26,17 @@ class Settings:
         )
         return Path(f"{data_home}/{self.cli_name}").expanduser()
 
+    @computed_field
     @property
     def db_file(self) -> Path:
         return self.data_dir / f"{self.cli_name}.db"
 
+    @computed_field
     @property
     def db_url(self) -> str:
         return f"sqlite:///{self.db_file}"
 
+    @computed_field
     @cached_property
     def config_dir(self) -> Path:
         config_home = (
@@ -42,10 +46,12 @@ class Settings:
         )
         return Path(f"{config_home}/{self.cli_name}").expanduser()
 
+    @computed_field
     @property
     def config_file(self) -> Path:
         return self.config_dir / f"{self.cli_name}.toml"
 
+    @computed_field
     @cached_property
     def config(self) -> Config:
         if self.config_file.exists():
@@ -53,6 +59,8 @@ class Settings:
                 # TODO: parse user configurations & pass them to the Config
                 contents = tomllib.load(f)  # noqa
         return Config()
+
+    model_config = SettingsConfigDict(frozen=True)
 
 
 settings = Settings()
