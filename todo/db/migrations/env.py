@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from todo.config import config as app_config
+from todo.config import settings
 from todo.db.core import Base
 
 # isort: split
@@ -16,7 +16,7 @@ if config.config_file_name is not None:
 
 target_metadata = Base.metadata
 
-config.set_main_option("sqlalchemy.url", app_config.db_url)
+config.set_main_option("sqlalchemy.url", settings.db_url)
 
 
 def run_migrations_offline() -> None:
