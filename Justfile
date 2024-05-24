@@ -34,7 +34,7 @@ lock-up:
 sync:
 	uv pip sync requirements.txt
 
-sync-dev:
+sync-dev: && init-dev
 	uv pip sync requirements-dev.txt
 
 list:
