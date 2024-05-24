@@ -3,9 +3,14 @@ import sys
 import tomllib
 from functools import cached_property
 from pathlib import Path
+from typing import Type
 
 from pydantic import BaseModel, computed_field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import (
+    BaseSettings,
+    PydanticBaseSettingsSource,
+    SettingsConfigDict,
+)
 
 
 class Config(BaseModel):
@@ -13,11 +18,11 @@ class Config(BaseModel):
 
 
 class Settings(BaseSettings):
-    # Load from env variables
+    # Load from env variables.
     todo_config_posix: bool = False
     todo_config_roaming: bool = False
 
-    # Constants (must be initialized to have the highest priority)
+    # Constants (must be initialized to have the highest priority).
     cli_name: str
     is_win: bool
 
@@ -72,7 +77,7 @@ class Settings(BaseSettings):
     def config(self) -> Config:
         if self.config_file.exists():
             with self.config_file.open("rb") as f:
-                # TODO: parse user configurations & pass them to the Config
+                # TODO: parse user configurations & pass them to the Config.
                 contents = tomllib.load(f)  # noqa
         return Config()
 
@@ -83,3 +88,25 @@ settings = Settings(
     cli_name="todo",
     is_win=sys.platform.startswith("win"),
 )
+
+
+# Designed only for development. It prioritizes settings from a dotenv file, avoiding
+# potential conflicts with env variables or secrets for real users.
+class DotenvSettings(BaseSettings):
+    debug: bool = False
+
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: Type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> tuple[PydanticBaseSettingsSource, ...]:
+        return (dotenv_settings,)
+
+    model_config = SettingsConfigDict(env_file=".env", frozen=True)
+
+
+dev_settings = DotenvSettings()
