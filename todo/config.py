@@ -13,14 +13,21 @@ class Config(BaseModel):
 
 
 class Settings(BaseSettings):
-    cli_name: str = "todo"
-    is_win: bool = sys.platform.startswith("win")
+    # Load from env variables
+    todo_config_posix: bool = False
+    todo_config_roaming: bool = False
+
+    # Constants (must be initialized to have the highest priority)
+    cli_name: str
+    is_win: bool
 
     @computed_field
     @cached_property
     def data_dir(self) -> Path:
         data_home = (
-            os.environ.get("LOCALAPPDATA", "~")
+            os.environ.get(
+                "APPDATA" if self.todo_config_roaming else "LOCALAPPDATA", "~"
+            )
             if self.is_win
             else os.environ.get("XDG_DATA_HOME", "~/.local/share")
         )
@@ -39,12 +46,21 @@ class Settings(BaseSettings):
     @computed_field
     @cached_property
     def config_dir(self) -> Path:
-        config_home = (
-            os.environ.get("LOCALAPPDATA", "~")
-            if self.is_win
-            else os.environ.get("XDG_CONFIG_HOME", "~/.config")
-        )
-        return Path(f"{config_home}/{self.cli_name}").expanduser()
+        if self.is_win:
+            config_home = os.environ.get(
+                "APPDATA" if self.todo_config_roaming else "LOCALAPPDATA", "~"
+            )
+            config_dir = self.cli_name
+        else:
+            config_home = (
+                "~"
+                if self.todo_config_posix
+                else os.environ.get("XDG_CONFIG_HOME", "~/.config")
+            )
+            config_dir = (
+                f".{self.cli_name}" if self.todo_config_posix else self.cli_name
+            )
+        return Path(f"{config_home}/{config_dir}").expanduser()
 
     @computed_field
     @property
@@ -63,4 +79,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(frozen=True)
 
 
-settings = Settings()
+settings = Settings(
+    cli_name="todo",
+    is_win=sys.platform.startswith("win"),
+)
