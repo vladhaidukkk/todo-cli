@@ -4,7 +4,9 @@ from typing import Annotated, Optional
 from typer import Argument, BadParameter, Option, Typer
 
 from todo.config import settings
+from todo.db.core import session_factory
 from todo.db.management import apply_migrations
+from todo.db.models import Task
 
 app = Typer(no_args_is_help=True)
 
@@ -37,4 +39,8 @@ def add(
         ),
     ] = None,
 ) -> None:
-    print(title, target_date and target_date.date())
+    with session_factory() as session:
+        new_task = Task(title=title, target_date=target_date)
+        session.add(new_task)
+        session.commit()
+    print("Task created successfully.")
