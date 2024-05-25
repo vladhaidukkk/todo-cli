@@ -59,6 +59,9 @@ dev = [
 [project.scripts]
 todo = "todo.main:app"
 
+[tool.setuptools]
+package-data = { "todo" = ["db/alembic.ini"] }
+
 [tool.isort]
 profile = "black"
 

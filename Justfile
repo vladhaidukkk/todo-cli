@@ -59,11 +59,13 @@ lint:
 	-bandit -c pyproject.toml -q -r todo
 
 # Database Management
+alembic := "alembic -c todo/db/alembic.ini"
+
 revise msg:
-    alembic revision --autogenerate -m "{{msg}}"
+    {{alembic}} revision --autogenerate -m "{{msg}}"
 
 migrate target="head":
-    alembic upgrade {{target}}
+    {{alembic}} upgrade {{target}}
 
 revert target="-1":
-    alembic downgrade {{target}}
+    {{alembic}} downgrade {{target}}
