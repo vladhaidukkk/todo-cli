@@ -81,7 +81,7 @@ def add(
         print(f"Task #{new_task.id} was created.")
 
 
-@app.command(help="Mark a task as complete.", no_args_is_help=True)
+@app.command(help="Mark a task as completed.", no_args_is_help=True)
 def complete(
     task_id: Annotated[
         int,
@@ -95,3 +95,17 @@ def complete(
         task.completed_at = now
         session.commit()
         print(f"Task #{task.id} was completed.")
+
+
+@app.command(help="Mark a task as uncompleted.", no_args_is_help=True)
+def uncomplete(
+    task_id: Annotated[
+        int,
+        Argument(help="ID of the task to uncomplete.", show_default=False),
+    ],
+) -> None:
+    with session_factory() as session:
+        task = session.get_one(Task, task_id)
+        task.completed_at = None
+        session.commit()
+        print(f"Task #{task.id} was uncompleted.")
