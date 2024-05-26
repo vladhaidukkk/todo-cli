@@ -1,4 +1,5 @@
-from datetime import datetime
+from contextlib import suppress
+from datetime import date, datetime
 from typing import Annotated, Optional
 
 from typer import Argument, BadParameter, Option, Typer
@@ -24,16 +25,38 @@ def title_callback(value: str) -> str:
     return value
 
 
+def target_date_parser(value: str) -> date | None:
+    # For some reason, Typer calls parser twice on prompt.
+    if isinstance(value, date) or value is None:
+        return value
+
+    now = datetime.now()
+    parsed: date | None = None
+
+    for fmt in ["%Y-%m-%d", "%m-%d", "%d"]:
+        with suppress(ValueError):
+            parsed = datetime.strptime(value, fmt).date()
+            if "%Y" not in fmt:
+                parsed = parsed.replace(year=now.year)
+            if "%m" not in fmt:
+                parsed = parsed.replace(month=now.month)
+            break
+
+    if not parsed:
+        raise BadParameter("Date format is invalid.")
+    return parsed
+
+
 @app.command()
 def add(
     title: Annotated[str, Argument(callback=title_callback, show_default=False)],
     target_date: Annotated[
-        Optional[datetime],
+        Optional[date],
         Option(
             "--date",
             "-d",
-            formats=["%Y-%m-%d"],
-            metavar="YYYY-MM-DD",
+            parser=target_date_parser,
+            metavar="[YYYY-MM-DD|MM-DD|DD]",
             prompt="Date",
             prompt_required=False,
         ),
