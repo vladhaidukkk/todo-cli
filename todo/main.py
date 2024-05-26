@@ -9,7 +9,10 @@ from todo.db.core import session_factory
 from todo.db.management import apply_migrations
 from todo.db.models import Task
 
-app = Typer(no_args_is_help=True)
+app = Typer(
+    help="Manage your daily tasks directly from the terminal.",
+    no_args_is_help=True,
+)
 
 
 @app.callback()
@@ -47,9 +50,16 @@ def target_date_parser(value: str) -> date | None:
     return parsed
 
 
-@app.command()
+@app.command(help="Create a new task.", no_args_is_help=True)
 def add(
-    title: Annotated[str, Argument(callback=title_callback, show_default=False)],
+    title: Annotated[
+        str,
+        Argument(
+            callback=title_callback,
+            help="Title of the task.",
+            show_default=False,
+        ),
+    ],
     target_date: Annotated[
         Optional[date],
         Option(
@@ -57,6 +67,7 @@ def add(
             "-d",
             parser=target_date_parser,
             metavar="[YYYY-MM-DD|MM-DD|DD]",
+            help="Specify a target date for the task.",
             prompt="Date",
             prompt_required=False,
         ),
