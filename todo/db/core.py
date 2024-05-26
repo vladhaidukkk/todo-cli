@@ -3,9 +3,9 @@ from itertools import islice
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-from todo.config import settings
+from todo.config import dev_settings, settings
 
-engine = create_engine(settings.db_url)
+engine = create_engine(settings.db_url, echo=dev_settings.debug)
 session_factory = sessionmaker(engine)
 
 

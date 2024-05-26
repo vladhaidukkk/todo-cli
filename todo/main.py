@@ -4,7 +4,7 @@ from typing import Annotated, Optional
 
 from typer import Argument, BadParameter, Option, Typer
 
-from todo.config import settings
+from todo.config import dev_settings, settings
 from todo.db.core import session_factory
 from todo.db.management import apply_migrations
 from todo.db.models import Task
@@ -12,6 +12,7 @@ from todo.db.models import Task
 app = Typer(
     help="Manage your daily tasks directly from the terminal.",
     no_args_is_help=True,
+    pretty_exceptions_show_locals=dev_settings.debug,
 )
 
 
