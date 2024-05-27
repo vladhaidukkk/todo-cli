@@ -48,14 +48,14 @@ health:
 
 # Code Formatting & Linting
 fmt:
-	-isort todo
-	-black todo
-	-docformatter todo
+	-isort todo tests
+	-black todo tests
+	-docformatter todo tests
 
 lint:
-	-pyright todo
-	-flake8 todo
-	-autoflake todo
+	-pyright todo tests
+	-flake8 todo tests
+	-autoflake todo tests
 	-bandit -c pyproject.toml -q -r todo
 
 # Database Management
