@@ -55,6 +55,7 @@ dev = [
     "autoflake",
     "bandit",
     "pre-commit",
+    "ipdb",
 ]
 
 [project.scripts]

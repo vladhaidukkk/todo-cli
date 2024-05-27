@@ -3,6 +3,8 @@
 alembic==1.13.1
 annotated-types==0.7.0
     # via pydantic
+asttokens==2.4.1
+    # via stack-data
 autoflake==2.3.1
 bandit==1.7.8
 black==24.4.2
@@ -19,11 +21,17 @@ click==8.1.7
     # via
     #   black
     #   typer
+decorator==5.1.1
+    # via
+    #   ipdb
+    #   ipython
 distlib==0.3.8
     # via virtualenv
 docformatter==1.7.5
 docutils==0.21.2
     # via readme-renderer
+executing==2.0.1
+    # via stack-data
 filelock==3.14.0
     # via virtualenv
 flake8==7.0.0
@@ -37,6 +45,9 @@ importlib-metadata==7.1.0
     # via twine
 iniconfig==2.0.0
     # via pytest
+ipdb==0.13.13
+ipython==8.24.0
+    # via ipdb
 isort==5.13.2
 jaraco-classes==3.4.0
     # via keyring
@@ -44,6 +55,8 @@ jaraco-context==5.3.0
     # via keyring
 jaraco-functools==4.0.1
     # via keyring
+jedi==0.19.1
+    # via ipython
 keyring==25.2.1
     # via twine
 mako==1.3.5
@@ -52,6 +65,8 @@ markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via mako
+matplotlib-inline==0.1.7
+    # via ipython
 mccabe==0.7.0
     # via flake8
 mdurl==0.1.2
@@ -73,10 +88,14 @@ packaging==24.0
     #   black
     #   build
     #   pytest
+parso==0.8.4
+    # via jedi
 pathspec==0.12.1
     # via black
 pbr==6.0.0
     # via stevedore
+pexpect==4.9.0
+    # via ipython
 pkginfo==1.10.0
     # via twine
 platformdirs==4.2.2
@@ -86,6 +105,12 @@ platformdirs==4.2.2
 pluggy==1.5.0
     # via pytest
 pre-commit==3.7.1
+prompt-toolkit==3.0.43
+    # via ipython
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.2
+    # via stack-data
 pycodestyle==2.11.1
     # via flake8
 pydantic==2.7.1
@@ -99,6 +124,7 @@ pyflakes==3.2.0
     #   flake8
 pygments==2.18.0
     # via
+    #   ipython
     #   readme-renderer
     #   rich
 pyproject-hooks==1.1.0
@@ -130,10 +156,18 @@ setuptools==70.0.0
     # via nodeenv
 shellingham==1.5.4
     # via typer
+six==1.16.0
+    # via asttokens
 sqlalchemy==2.0.30
     # via alembic
+stack-data==0.6.3
+    # via ipython
 stevedore==5.2.0
     # via bandit
+traitlets==5.14.3
+    # via
+    #   ipython
+    #   matplotlib-inline
 twine==5.1.0
 typer==0.12.3
 typing-extensions==4.12.0
@@ -151,5 +185,7 @@ urllib3==2.2.1
     #   twine
 virtualenv==20.26.2
     # via pre-commit
+wcwidth==0.2.13
+    # via prompt-toolkit
 zipp==3.18.2
     # via importlib-metadata

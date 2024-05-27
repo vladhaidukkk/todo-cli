@@ -106,7 +106,7 @@ class DotenvSettings(BaseSettings):
     ) -> tuple[PydanticBaseSettingsSource, ...]:
         return (dotenv_settings,)
 
-    model_config = SettingsConfigDict(env_file=".env", frozen=True)
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore", frozen=True)
 
 
 dev_settings = DotenvSettings()
