@@ -29,26 +29,32 @@ def title_callback(value: str) -> str:
     return value
 
 
-def target_date_parser(value: str) -> date | None:
-    # For some reason, Typer calls parser twice on prompt.
-    if isinstance(value, date) or value is None:
-        return value
+def parse_str_to_date(value: str, formats: Optional[list[str]] = None) -> date:
+    formats = formats or ["%Y-%m-%d", "%m-%d", "%d"]
 
-    now = datetime.now()
-    parsed: date | None = None
-
-    for fmt in ["%Y-%m-%d", "%m-%d", "%d"]:
+    for fmt in formats:
         with suppress(ValueError):
             parsed = datetime.strptime(value, fmt).date()
+            now = datetime.now()
             if "%Y" not in fmt:
                 parsed = parsed.replace(year=now.year)
             if "%m" not in fmt:
                 parsed = parsed.replace(month=now.month)
-            break
+            return parsed
 
-    if not parsed:
-        raise BadParameter("Date format is invalid.")
-    return parsed
+    joined_formats = ", ".join(f"'{fmt}'" for fmt in formats)
+    raise ValueError(f"'{value}' does not match any of formats: {joined_formats}.")
+
+
+def target_date_parser(value: str) -> Optional[date]:
+    # For some reason, Typer calls parser twice on prompt.
+    if isinstance(value, date) or value is None:
+        return value
+
+    try:
+        return parse_str_to_date(value)
+    except ValueError as exc:
+        raise BadParameter(str(exc))
 
 
 @app.command(help="Create a new task.", no_args_is_help=True)
