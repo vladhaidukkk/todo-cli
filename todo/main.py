@@ -115,3 +115,17 @@ def uncomplete(
         task.completed_at = None
         session.commit()
         print(f"Task #{task.id} was uncompleted.")
+
+
+@app.command(help="Delete a task.", no_args_is_help=True)
+def delete(
+    task_id: Annotated[
+        int,
+        Argument(help="ID of the task to delete.", show_default=False),
+    ]
+) -> None:
+    with session_factory() as session:
+        task = session.get_one(Task, task_id)
+        session.delete(task)
+        session.commit()
+        print(f"Task #{task.id} was deleted.")
