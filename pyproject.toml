@@ -46,6 +46,7 @@ dev = [
     "build",
     "twine",
     "pytest",
+    "pytest-mock",
     "isort",
     "black",
     "docformatter",

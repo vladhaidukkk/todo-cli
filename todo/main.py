@@ -46,9 +46,9 @@ def parse_str_to_date(value: str, formats: Optional[list[str]] = None) -> date:
     raise ValueError(f"'{value}' does not match any of formats: {joined_formats}.")
 
 
-def target_date_parser(value: str) -> Optional[date]:
+def target_date_parser(value: str) -> date:
     # For some reason, Typer calls parser twice on prompt.
-    if isinstance(value, date) or value is None:
+    if isinstance(value, date):
         return value
 
     try:

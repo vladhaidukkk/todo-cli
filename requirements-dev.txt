@@ -131,6 +131,8 @@ pyproject-hooks==1.1.0
     # via build
 pyright==1.1.364
 pytest==8.2.1
+    # via pytest-mock
+pytest-mock==3.14.0
 python-dotenv==1.0.1
     # via pydantic-settings
 pyyaml==6.0.1
