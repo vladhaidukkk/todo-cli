@@ -1,4 +1,5 @@
 from itertools import islice
+from typing import Optional
 
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -26,12 +27,12 @@ Base = declarative_base(metadata=metadata)
 class ModelBase(Base):
     __abstract__ = True
 
-    __repr_limit__: int | None = None
+    __repr_limit__: Optional[int] = None
     __repr_ignore__: list[str] = []
 
     def __repr__(self) -> str:
         cols = [
-            f"{col}={getattr(self, col)}"
+            f"{col}={repr(getattr(self, col))}"
             for col in islice(self.__table__.columns.keys(), self.__repr_limit__)
             if col not in self.__repr_ignore__
         ]
