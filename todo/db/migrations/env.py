@@ -4,7 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from todo.config import dev_settings, settings
-from todo.db.core import Base
+from todo.db.core import ModelBase
 
 # isort: split
 import todo.db.models  # noqa
@@ -14,7 +14,7 @@ config = context.config
 if dev_settings.debug and config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = Base.metadata
+target_metadata = ModelBase.metadata
 
 config.set_main_option("sqlalchemy.url", settings.db_url)
 

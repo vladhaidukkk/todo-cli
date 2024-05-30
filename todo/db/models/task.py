@@ -3,10 +3,10 @@ from datetime import date, datetime
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql import func
 
-from todo.db.core import Base
+from todo.db.core import ModelBase
 
 
-class Task(Base):
+class Task(ModelBase):
     __tablename__ = "tasks"
 
     id: Mapped[int] = mapped_column(primary_key=True)
