@@ -1,7 +1,7 @@
 import time
 
 import pytest
-from pytest import FixtureRequest, Parser
+from pytest import Config, FixtureRequest, Parser
 
 
 def pytest_addoption(parser: Parser):
@@ -13,21 +13,23 @@ def pytest_addoption(parser: Parser):
     )
 
 
-@pytest.fixture(scope="session", autouse=True)
-def show_total_duration(request: FixtureRequest):
-    if not request.config.getoption("--total-duration"):
-        yield
-        return
+def pytest_configure(config: Config):
+    if config.getoption("--total-duration"):
 
-    start = time.perf_counter()
-    yield
-    elapsed = time.perf_counter() - start
+        def show_total_duration(request: FixtureRequest):
+            start = time.perf_counter()
+            yield
+            elapsed = time.perf_counter() - start
 
-    output = f"Total duration: {elapsed:.3f}s"
-    divider = "=" * len(output)
+            output = f"Total duration: {elapsed:.3f}s"
+            divider = "=" * len(output)
 
-    cap_manager = request.config.pluginmanager.getplugin("capturemanager")
-    with cap_manager.global_and_fixture_disabled():  # type: ignore
-        print(f"\n\n{divider}")
-        print(output)
-        print(divider, end="")
+            cap_manager = request.config.pluginmanager.getplugin("capturemanager")
+            with cap_manager.global_and_fixture_disabled():  # type: ignore
+                print(f"\n\n{divider}")
+                print(output)
+                print(divider, end="")
+
+        globals()["show_total_duration"] = pytest.fixture(
+            scope="session", autouse=True
+        )(show_total_duration)
