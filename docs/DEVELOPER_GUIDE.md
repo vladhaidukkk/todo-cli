@@ -5,11 +5,11 @@ This guide will help you understand how we set up and manage this project.
 ## Table of Contents
 
 - [Project Configuration](#project-configuration)
-    - [Why We Like `pyproject.toml`](#why-we-like-pyprojecttoml)
-    - [What’s in `pyproject.toml`](#whats-in-pyprojecttoml)
+    - [Why We Like pyproject.toml](#why-we-like-pyprojecttoml)
+    - [What’s in pyproject.toml](#whats-in-pyprojecttoml)
 - [Project Tasks](#project-tasks)
-    - [What's a `Justfile`](#whats-a-justfile)
-    - [How to Use `just`](#how-to-use-just)
+    - [What's a Justfile](#whats-a-justfile)
+    - [How to Use just](#how-to-use-just)
 - [Dependencies Management](#dependencies-management)
     - [Dependency Types](#dependency-types)
     - [Management Workflow](#management-workflow)
@@ -28,7 +28,7 @@ This guide will help you understand how we set up and manage this project.
 We use a `pyproject.toml` file to centralize all our project settings. This ensures consistent configuration for
 everyone working on the project, all in a single file.
 
-### Why We Like `pyproject.toml`
+### Why We Like pyproject.toml
 
 The `pyproject.toml` file is great for a few reasons:
 
@@ -37,7 +37,7 @@ The `pyproject.toml` file is great for a few reasons:
   see [PEP621](https://peps.python.org/pep-0621/)).
 - **Works Well with Most Tools**: It's compatible with many tools that Python developers use, making our lives easier.
 
-### What’s in `pyproject.toml`
+### What’s in pyproject.toml
 
 In this file, we include:
 
@@ -51,12 +51,12 @@ We use [just](https://just.systems/man/en/) with its `Justfile` to describe and 
 modern alternative to `make` and its [Makefile](https://makefiletutorial.com), offering a range of useful features,
 such as the ability to pass arguments to tasks.
 
-### What's a `Justfile`
+### What's a Justfile
 
 A `Justfile` is a special file for the `just` utility that allows us to write down frequently used commands and assign
 them short names. This makes our work faster and less error-prone, as we no longer need to type out long commands.
 
-### How to Use `just`
+### How to Use just
 
 If you need to run a task from the `Justfile`, just do this:
 
