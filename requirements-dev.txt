@@ -32,6 +32,7 @@ docutils==0.21.2
     # via readme-renderer
 executing==2.0.1
     # via stack-data
+faker==25.4.0
 filelock==3.14.0
     # via virtualenv
 flake8==7.0.0
@@ -133,6 +134,8 @@ pyright==1.1.365
 pytest==8.2.1
     # via pytest-mock
 pytest-mock==3.14.0
+python-dateutil==2.9.0.post0
+    # via faker
 python-dotenv==1.0.1
     # via pydantic-settings
 pyyaml==6.0.1
@@ -157,7 +160,9 @@ rich==13.7.1
 shellingham==1.5.4
     # via typer
 six==1.16.0
-    # via asttokens
+    # via
+    #   asttokens
+    #   python-dateutil
 sqlalchemy==2.0.30
     # via alembic
 stack-data==0.6.3
