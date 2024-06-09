@@ -13,11 +13,11 @@ markupsafe==2.1.5
     # via mako
 mdurl==0.1.2
     # via markdown-it-py
-pydantic==2.7.2
+pydantic==2.7.3
     # via pydantic-settings
-pydantic-core==2.18.3
+pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.2.1
+pydantic-settings==2.3.1
 pygments==2.18.0
     # via rich
 python-dotenv==1.0.1
@@ -29,7 +29,7 @@ shellingham==1.5.4
 sqlalchemy==2.0.30
     # via alembic
 typer==0.12.3
-typing-extensions==4.12.0
+typing-extensions==4.12.2
     # via
     #   alembic
     #   pydantic

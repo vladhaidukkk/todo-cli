@@ -9,7 +9,7 @@ autoflake==2.3.1
 bandit==1.7.8
 black==24.4.2
 build==1.2.1
-certifi==2024.2.2
+certifi==2024.6.2
     # via requests
 cfgv==3.4.0
     # via pre-commit
@@ -32,7 +32,7 @@ docutils==0.21.2
     # via readme-renderer
 executing==2.0.1
     # via stack-data
-faker==25.4.0
+faker==25.8.0
 filelock==3.14.0
     # via virtualenv
 flake8==7.0.0
@@ -47,7 +47,7 @@ importlib-metadata==7.1.0
 iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
-ipython==8.24.0
+ipython==8.25.0
     # via ipdb
 isort==5.13.2
 jaraco-classes==3.4.0
@@ -80,7 +80,7 @@ mypy-extensions==1.0.0
     # via black
 nh3==0.2.17
     # via readme-renderer
-nodeenv==1.9.0
+nodeenv==1.9.1
     # via
     #   pre-commit
     #   pyright
@@ -97,7 +97,7 @@ pbr==6.0.0
     # via stevedore
 pexpect==4.9.0
     # via ipython
-pkginfo==1.10.0
+pkginfo==1.11.1
     # via twine
 platformdirs==4.2.2
     # via
@@ -106,7 +106,7 @@ platformdirs==4.2.2
 pluggy==1.5.0
     # via pytest
 pre-commit==3.7.1
-prompt-toolkit==3.0.45
+prompt-toolkit==3.0.46
     # via ipython
 ptyprocess==0.7.0
     # via pexpect
@@ -114,11 +114,11 @@ pure-eval==0.2.2
     # via stack-data
 pycodestyle==2.11.1
     # via flake8
-pydantic==2.7.2
+pydantic==2.7.3
     # via pydantic-settings
-pydantic-core==2.18.3
+pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.2.1
+pydantic-settings==2.3.1
 pyflakes==3.2.0
     # via
     #   autoflake
@@ -130,8 +130,8 @@ pygments==2.18.0
     #   rich
 pyproject-hooks==1.1.0
     # via build
-pyright==1.1.365
-pytest==8.2.1
+pyright==1.1.366
+pytest==8.2.2
     # via pytest-mock
 pytest-mock==3.14.0
 python-dateutil==2.9.0.post0
@@ -175,7 +175,7 @@ traitlets==5.14.3
     #   matplotlib-inline
 twine==5.1.0
 typer==0.12.3
-typing-extensions==4.12.0
+typing-extensions==4.12.2
     # via
     #   alembic
     #   pydantic
@@ -192,5 +192,5 @@ virtualenv==20.26.2
     # via pre-commit
 wcwidth==0.2.13
     # via prompt-toolkit
-zipp==3.19.0
+zipp==3.19.2
     # via importlib-metadata

@@ -2,7 +2,7 @@ from contextlib import suppress
 from datetime import date, datetime
 from typing import Annotated, Optional
 
-from typer import Argument, BadParameter, Option, Typer
+from typer import Argument, BadParameter, Exit, Option, Typer
 
 from todo.config import dev_settings, settings
 from todo.db.core import session_factory
@@ -95,12 +95,19 @@ def complete(
     ],
 ) -> None:
     with session_factory() as session:
-        task = session.get_one(Task, task_id)
-        now = datetime.now()
-        task.updated_at = now
-        task.completed_at = now
-        session.commit()
-        print(f"Task #{task.id} was completed.")
+        task = session.get(Task, task_id)
+        if not task:
+            print(f"Task #{task_id} does not exist.")
+            raise Exit(1)
+
+        if task.completed_at:
+            print(f"Task #{task.id} has already been completed.")
+        else:
+            now = datetime.now()
+            task.updated_at = now
+            task.completed_at = now
+            session.commit()
+            print(f"Task #{task.id} was completed.")
 
 
 @app.command(help="Mark a task as uncompleted.", no_args_is_help=True)
@@ -111,10 +118,17 @@ def uncomplete(
     ],
 ) -> None:
     with session_factory() as session:
-        task = session.get_one(Task, task_id)
-        task.completed_at = None
-        session.commit()
-        print(f"Task #{task.id} was uncompleted.")
+        task = session.get(Task, task_id)
+        if not task:
+            print(f"Task #{task_id} does not exist.")
+            raise Exit(1)
+
+        if not task.completed_at:
+            print(f"Task #{task.id} has not been completed yet.")
+        else:
+            task.completed_at = None
+            session.commit()
+            print(f"Task #{task.id} was uncompleted.")
 
 
 @app.command(help="Delete a task.", no_args_is_help=True)
@@ -125,7 +139,11 @@ def delete(
     ]
 ) -> None:
     with session_factory() as session:
-        task = session.get_one(Task, task_id)
-        session.delete(task)
-        session.commit()
-        print(f"Task #{task.id} was deleted.")
+        task = session.get(Task, task_id)
+        if not task:
+            print(f"Task #{task_id} does not exist.")
+            raise Exit(1)
+        else:
+            session.delete(task)
+            session.commit()
+            print(f"Task #{task.id} was deleted.")
