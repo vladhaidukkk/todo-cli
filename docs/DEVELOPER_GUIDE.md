@@ -10,6 +10,14 @@ This guide will help you understand how we set up and manage this project.
 - [Project Tasks](#project-tasks)
     - [What's a Justfile](#whats-a-justfile)
     - [How to Use just](#how-to-use-just)
+- [CLI Management](#cli-management)
+    - [Local Installation](#local-installation)
+    - [Usage as a Package](#usage-as-a-package)
+    - [Update Usage Guide](#update-usage-guide)
+    - [Increase Version](#increase-version)
+    - [Building](#building)
+    - [Test Wheel Distribution](#test-wheel-distribution)
+    - [Publishing](#publishing)
 - [Dependencies Management](#dependencies-management)
     - [Dependency Types](#dependency-types)
     - [Management Workflow](#management-workflow)
@@ -68,6 +76,95 @@ just fmt
 ```
 
 > **NOTE**: `just`, unlike `make`, allows you to execute tasks from any directory within the project.
+
+## CLI Management
+
+This section provides straightforward guidance on developing and deploying our CLI. Here, we explain how to work with it
+locally, build it, and publish it.
+
+### Local Installation
+
+To install the CLI locally, follow the standard package installation procedure but point to the current package
+directory. The command has been extracted into the `Justfile`, so you can simply run the following command:
+
+```shell
+just init
+```
+
+Using this approach requires you to reinstall the package on every change. To simplify your workflow, we recommend
+installing the CLI in editable mode with the following command:
+
+```shell
+just init-dev
+```
+
+Editable mode allows you to see your code changes reflected immediately without needing to reinstall.
+
+### Usage as a Package
+
+The CLI can also function as a standalone package, thanks to the `__main__.py` file located in the root of the code
+directory. This setup allows you to work with it locally without needing to install it. The only drawback is the lack of
+support for shell completion, but it's still ideal for quick testing:
+
+```shell
+python -m todo
+```
+
+Real users can also use it as a package, but again, they lose the ability to have shell completion in this case.
+
+### Update Usage Guide
+
+After making changes to the CLI commands interface, it is crucial to update the [Usage Guide](./USAGE_GUIDE.md) to
+reflect these modifications before deployment. To do this automatically, execute the following command:
+
+```shell
+just gen-doc
+```
+
+After this, you shouldn't worry that you've missed something, as this command is based on a special feature provided for
+us by [Typer](https://typer.tiangolo.com/).
+
+### Increase Version
+
+Before building and publishing the CLI, it's also important to increment its version. This update should be made in
+the `pyproject.toml` file. Ensure that the version change adheres to [Semantic Versioning](https://semver.org/)
+principles, which help maintain compatibility and predictability in version updates.
+
+### Building
+
+We use [Setuptools](https://setuptools.pypa.io/en/latest/) as our build system, as it meets all our project
+requirements. To simplify the build process, we've extracted the command for it into the `Justfile`, which is based on
+the [build](https://build.pypa.io/en/stable/) package:
+
+```bash
+just build
+```
+
+This command generates both a source archive and a wheel distribution, ensuring a versatile deployment across different
+environments.
+
+### Test Wheel Distribution
+
+To verify that the wheel package is installable, you can install it locally using the following command:
+
+```shell
+pip install path_to_wheel.whl
+```
+
+Do this on your system before deployment or further distribution.
+
+### Publishing
+
+Once you have updated the [Usage Guide](./USAGE_GUIDE.md), incremented the CLI version, and built the package, you are
+ready to release a new version. Currently, we publish exclusively to [TestPyPI](https://test.pypi.org/). Release the new
+version by executing the following command:
+
+```shell
+just publish-test
+```
+
+This command will upload the latest version of the CLI to TestPyPI. It's ideal for pre-release testing and validation,
+but we currently use it as the main environment for our CLI.
 
 ## Dependencies Management
 
