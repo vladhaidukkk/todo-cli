@@ -5,17 +5,25 @@ terminal.
 
 ## Quick Start
 
-To get the tool up and running quickly, please note that it is currently hosted on [TestPyPI](https://test.pypi.org/)
-and not on the regular [PyPI](https://pypi.org/). This means the installation command differs from the typical method:
+To get the tool up and running quickly, it's important to note that it is hosted on [TestPyPI](https://test.pypi.org/),
+not on the standard [PyPI](https://pypi.org/). This affects how you install the tool.
+
+Install using `pip`:
 
 ```shell
 pip install -i https://test.pypi.org/simple --extra-index-url https://pypi.org/simple todo-cli-vh
 ```
 
-This command installs the latest version of `todo-cli-vh` from TestPyPI, while also allowing dependencies to be resolved
-from the official PyPI index.
+If you prefer to use `pipx`, the installation command slightly differs:
 
-Once installed, you can begin using the `todo` command in your terminal to manage your tasks.
+```shell
+pipx install -i https://test.pypi.org/simple todo-cli-vh --pip-args "--extra-index-url https://pypi.org/simple"
+```
+
+These commands ensure that the latest version of `todo-cli-vh` is installed from TestPyPI, while dependencies are
+searched for in the main PyPI repository.
+
+Once the installation is complete, use the `todo` command in your terminal to start managing your tasks efficiently.
 
 ## Guides
 
