@@ -2,7 +2,7 @@ from itertools import islice
 from typing import Optional
 
 from sqlalchemy import MetaData, create_engine
-from sqlalchemy.orm import declarative_base, declared_attr, sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 from todo.config import dev_settings, settings
 
@@ -26,10 +26,6 @@ DeclarativeBase = declarative_base(metadata=metadata)
 
 class Base(DeclarativeBase):
     __abstract__ = True
-
-    @declared_attr.directive
-    def __tablename__(cls) -> str:
-        return f"{cls.__name__.lower()}s"
 
     __repr_limit__: Optional[int] = None
     __repr_ignore__: list[str] = []

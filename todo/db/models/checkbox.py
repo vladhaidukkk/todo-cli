@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class Checkbox(Base):
-    __tablename__ = "checkboxes"  # type: ignore
+    __tablename__ = "checkboxes"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
