@@ -2,6 +2,7 @@ from contextlib import suppress
 from datetime import date, datetime
 from typing import Annotated, Optional
 
+from rich.console import Console
 from typer import Argument, BadParameter, Exit, Option, Typer
 
 from todo.config import dev_settings, settings
@@ -14,6 +15,7 @@ app = Typer(
     no_args_is_help=True,
     pretty_exceptions_show_locals=dev_settings.debug,
 )
+console = Console()
 
 
 @app.callback()
@@ -84,7 +86,9 @@ def add(
         new_task = Task(title=title, target_date=target_date)
         session.add(new_task)
         session.commit()
-        print(f"Task #{new_task.id} was created.")
+        console.print(
+            f"Task [magenta]#{new_task.id}[/] was created.", style="bold green"
+        )
 
 
 @app.command(help="Mark a task as completed.", no_args_is_help=True)
@@ -97,17 +101,22 @@ def complete(
     with session_factory() as session:
         task = session.get(Task, task_id)
         if not task:
-            print(f"Task #{task_id} does not exist.")
+            console.print(f"Task [cyan]#{task_id}[/] does not exist.", style="bold red")
             raise Exit(1)
 
         if task.completed_at:
-            print(f"Task #{task.id} has already been completed.")
+            console.print(
+                f"Task [blue]#{task.id}[/] has already been completed.",
+                style="bold yellow",
+            )
         else:
             now = datetime.now()
             task.updated_at = now
             task.completed_at = now
             session.commit()
-            print(f"Task #{task.id} was completed.")
+            console.print(
+                f"Task [magenta]#{task.id}[/] was completed.", style="bold green"
+            )
 
 
 @app.command(help="Mark a task as uncompleted.", no_args_is_help=True)
@@ -120,15 +129,20 @@ def uncomplete(
     with session_factory() as session:
         task = session.get(Task, task_id)
         if not task:
-            print(f"Task #{task_id} does not exist.")
+            console.print(f"Task [cyan]#{task_id}[/] does not exist.", style="bold red")
             raise Exit(1)
 
         if not task.completed_at:
-            print(f"Task #{task.id} has not been completed yet.")
+            console.print(
+                f"Task [blue]#{task.id}[/] has not been completed yet.",
+                style="bold yellow",
+            )
         else:
             task.completed_at = None
             session.commit()
-            print(f"Task #{task.id} was uncompleted.")
+            console.print(
+                f"Task [magenta]#{task.id}[/] was uncompleted.", style="bold green"
+            )
 
 
 @app.command(help="Delete a task.", no_args_is_help=True)
@@ -141,9 +155,11 @@ def delete(
     with session_factory() as session:
         task = session.get(Task, task_id)
         if not task:
-            print(f"Task #{task_id} does not exist.")
+            console.print(f"Task [cyan]#{task_id}[/] does not exist.", style="bold red")
             raise Exit(1)
         else:
             session.delete(task)
             session.commit()
-            print(f"Task #{task.id} was deleted.")
+            console.print(
+                f"Task [magenta]#{task.id}[/] was deleted.", style="bold green"
+            )
