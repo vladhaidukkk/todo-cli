@@ -1,19 +1,21 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from todo.db.core import Base
 
 if TYPE_CHECKING:
-    from .checkbox import Checkbox
+    from .task import Task
 
 
-class Task(Base):
+class Checkbox(Base):
+    __tablename__ = "checkboxes"  # type: ignore
+
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
-    target_date: Mapped[Optional[date]]
     created_at: Mapped[datetime] = mapped_column(
         server_default=func.current_timestamp()
     )
@@ -22,5 +24,6 @@ class Task(Base):
         onupdate=datetime.now(),
     )
     completed_at: Mapped[Optional[datetime]]
+    task_id: Mapped[int] = mapped_column(ForeignKey("tasks.id"))
 
-    checkboxes: Mapped[list["Checkbox"]] = relationship(back_populates="task")
+    task: Mapped["Task"] = relationship(back_populates="checkboxes")
