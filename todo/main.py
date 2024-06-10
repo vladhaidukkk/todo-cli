@@ -1,14 +1,15 @@
 from contextlib import suppress
 from datetime import date, datetime
+from itertools import count
 from typing import Annotated, Optional
 
 from rich.console import Console
-from typer import Argument, BadParameter, Exit, Option, Typer
+from typer import Argument, BadParameter, Exit, Option, Typer, prompt
 
 from todo.config import dev_settings, settings
 from todo.db.core import session_factory
 from todo.db.management import apply_migrations
-from todo.db.models import Task
+from todo.db.models import Assertion, Task
 
 app = Typer(
     help="Manage your daily tasks directly from the terminal.",
@@ -81,9 +82,29 @@ def add(
             prompt_required=False,
         ),
     ] = None,
+    prompt_assertions: Annotated[
+        bool,
+        Option(
+            "--assertions",
+            "-a",
+            help="Prompt for assertions.",
+        ),
+    ] = False,
 ) -> None:
+    assertion_titles: list[str] = []
+    if prompt_assertions:
+        console.print("Enter assertions (or 'stop' to finish)")
+        for assertion_idx in count(1):
+            assertion_input = prompt(str(assertion_idx))
+            if assertion_input == "stop":
+                break
+            assertion_titles.append(assertion_input)
+
     with session_factory() as session:
-        new_task = Task(title=title, target_date=target_date)
+        assertions = [
+            Assertion(title=assertion_title) for assertion_title in assertion_titles
+        ]
+        new_task = Task(title=title, target_date=target_date, assertions=assertions)
         session.add(new_task)
         session.commit()
         console.print(
