@@ -19,6 +19,7 @@ $ todo [OPTIONS] COMMAND [ARGS]...
 * `add`: Create a new task.
 * `complete`: Mark a task as completed.
 * `delete`: Delete a task.
+* `list`: List tasks.
 * `uncomplete`: Mark a task as uncompleted.
 
 ## `todo add`
@@ -38,6 +39,7 @@ $ todo add [OPTIONS] TITLE
 **Options**:
 
 * `-d, --date [YYYY-MM-DD|MM-DD|DD]`: Specify a target date for the task.
+* `-a, --assertions`: Prompt for assertions.
 * `--help`: Show this message and exit.
 
 ## `todo complete`
@@ -71,6 +73,20 @@ $ todo delete [OPTIONS] TASK_ID
 **Arguments**:
 
 * `TASK_ID`: ID of the task to delete.  [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+## `todo list`
+
+List tasks.
+
+**Usage**:
+
+```console
+$ todo list [OPTIONS]
+```
 
 **Options**:
 

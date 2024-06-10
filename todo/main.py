@@ -4,6 +4,7 @@ from itertools import count
 from typing import Annotated, Optional
 
 from rich.console import Console
+from sqlalchemy.sql import select
 from typer import Argument, BadParameter, Exit, Option, Typer, prompt
 
 from todo.config import dev_settings, settings
@@ -184,3 +185,12 @@ def delete(
             console.print(
                 f"Task [magenta]#{task.id}[/] was deleted.", style="bold green"
             )
+
+
+@app.command("list", help="List tasks.")
+def list_() -> None:
+    with session_factory() as session:
+        query = select(Task)
+        tasks = session.scalars(query)
+        for task in tasks:
+            console.print(task)
