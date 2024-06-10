@@ -7,7 +7,7 @@ from sqlalchemy.sql import func
 from todo.db.core import Base
 
 if TYPE_CHECKING:
-    from .checkbox import Checkbox
+    from .assertion import Assertion
 
 
 class Task(Base):
@@ -25,4 +25,4 @@ class Task(Base):
     )
     completed_at: Mapped[Optional[datetime]]
 
-    checkboxes: Mapped[list["Checkbox"]] = relationship(back_populates="task")
+    assertions: Mapped[list["Assertion"]] = relationship(back_populates="task")

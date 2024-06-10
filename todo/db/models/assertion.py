@@ -11,8 +11,8 @@ if TYPE_CHECKING:
     from .task import Task
 
 
-class Checkbox(Base):
-    __tablename__ = "checkboxes"
+class Assertion(Base):
+    __tablename__ = "assertions"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
@@ -26,4 +26,4 @@ class Checkbox(Base):
     completed_at: Mapped[Optional[datetime]]
     task_id: Mapped[int] = mapped_column(ForeignKey("tasks.id"))
 
-    task: Mapped["Task"] = relationship(back_populates="checkboxes")
+    task: Mapped["Task"] = relationship(back_populates="assertions")

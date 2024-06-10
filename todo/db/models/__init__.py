@@ -1,2 +1,2 @@
-from .checkbox import Checkbox
+from .assertion import Assertion
 from .task import Task
