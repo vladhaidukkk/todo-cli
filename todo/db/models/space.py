@@ -1,10 +1,13 @@
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from todo.db.core import Base
+
+if TYPE_CHECKING:
+    from .task import Task
 
 
 class Space(Base):
@@ -20,3 +23,5 @@ class Space(Base):
         server_default=func.current_timestamp(),
         onupdate=datetime.now(),
     )
+
+    tasks: Mapped[list["Task"]] = relationship(back_populates="space")
