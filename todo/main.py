@@ -10,7 +10,7 @@ from typer import Argument, BadParameter, Exit, Option, Typer, prompt
 from todo.config import dev_settings, settings
 from todo.db.core import session_factory
 from todo.db.management import apply_migrations
-from todo.db.models import Assertion, Task
+from todo.db.models import Assertion, Space, Task
 
 app = Typer(
     help="Manage your daily tasks directly from the terminal.",
@@ -18,6 +18,36 @@ app = Typer(
     pretty_exceptions_show_locals=dev_settings.debug,
 )
 console = Console()
+
+spaces_app = Typer(help="Manage spaces.", no_args_is_help=True)
+
+
+@spaces_app.command("add", help="Create a new space.", no_args_is_help=True)
+def create_space(
+    name: Annotated[
+        str, Argument(help="Unique name of the space.", show_default=False)
+    ],
+    description: Annotated[
+        Optional[str],
+        Option(
+            "--description",
+            "-d",
+            help="Specify a description for the space.",
+            prompt="Description",
+            prompt_required=False,
+        ),
+    ] = None,
+) -> None:
+    with session_factory() as session:
+        new_space = Space(name=name, description=description)
+        session.add(new_space)
+        session.commit()
+        console.print(
+            f"Space [magenta]#{new_space.id}[/] was created.", style="bold green"
+        )
+
+
+app.add_typer(spaces_app, name="spaces")
 
 
 @app.callback()

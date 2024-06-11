@@ -20,6 +20,7 @@ $ todo [OPTIONS] COMMAND [ARGS]...
 * `complete`: Mark a task as completed.
 * `delete`: Delete a task.
 * `list`: List tasks.
+* `spaces`: Manage spaces.
 * `uncomplete`: Mark a task as uncompleted.
 
 ## `todo add`
@@ -90,6 +91,43 @@ $ todo list [OPTIONS]
 
 **Options**:
 
+* `--help`: Show this message and exit.
+
+## `todo spaces`
+
+Manage spaces.
+
+**Usage**:
+
+```console
+$ todo spaces [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+**Commands**:
+
+* `add`: Create a new space.
+
+### `todo spaces add`
+
+Create a new space.
+
+**Usage**:
+
+```console
+$ todo spaces add [OPTIONS] NAME
+```
+
+**Arguments**:
+
+* `NAME`: Unique name of the space.  [required]
+
+**Options**:
+
+* `-d, --description TEXT`: Specify a description for the space.
 * `--help`: Show this message and exit.
 
 ## `todo uncomplete`
