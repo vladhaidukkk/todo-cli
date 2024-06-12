@@ -1,10 +1,11 @@
 import time
+from collections.abc import Generator
 
 import pytest
 from pytest import Config, FixtureRequest, Parser
 
 
-def pytest_addoption(parser: Parser):
+def pytest_addoption(parser: Parser) -> None:
     parser.addoption(
         "--total-duration",
         action="store_true",
@@ -13,10 +14,10 @@ def pytest_addoption(parser: Parser):
     )
 
 
-def pytest_configure(config: Config):
+def pytest_configure(config: Config) -> None:
     if config.getoption("--total-duration"):
 
-        def show_total_duration(request: FixtureRequest):
+        def show_total_duration(request: FixtureRequest) -> Generator[None, None, None]:
             start = time.perf_counter()
             yield
             elapsed = time.perf_counter() - start

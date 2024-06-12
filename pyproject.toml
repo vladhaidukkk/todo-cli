@@ -67,8 +67,8 @@ line-length = 88
 show-fixes = true
 
 [tool.ruff.lint]
-select = ["F", "E", "C90", "I", "D", "UP"]
-ignore = ["D1", "D203", "D213"]
+select = ["F", "E", "C90", "I", "D", "UP", "ANN"]
+ignore = ["D1", "D203", "D213", "ANN1"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
