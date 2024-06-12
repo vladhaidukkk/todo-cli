@@ -65,8 +65,33 @@ line-length = 88
 show-fixes = true
 
 [tool.ruff.lint]
-select = ["F", "E", "C90", "I", "D", "UP", "ANN"]
-ignore = ["D1", "D203", "D213", "ANN1"]
+select = [
+  # pyflakes
+  "F",
+  # pycodestyle
+  "E",
+  "W",
+  # mccabe
+  "C90",
+  # isort
+  "I",
+  # pydocstyle
+  "D",
+  # pyupgrade
+  "UP",
+  # flake8-annotations
+  "ANN",
+]
+ignore = [
+  # Missing docstrings in public objects
+  "D1",
+  # one-blank-line-before-class (incompatible with D211)
+  "D203",
+  # multi-line-summary-second-line (incompatible with D212)
+  "D213",
+  # Missing type annotations for self & cls
+  "ANN1",
+]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
@@ -76,7 +101,6 @@ max-complexity = 8
 
 [tool.ruff.format]
 docstring-code-format = true
-
 
 [tool.bandit]
 exclude_dirs = ["tests"]
