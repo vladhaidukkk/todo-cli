@@ -48,13 +48,8 @@ dev = [
     "pytest>=8.2.2,<9.0.0",
     "pytest-mock>=3.14.0,<4.0.0",
     "faker>=25.8.0,<26.0.0",
-    "isort>=5.13.2,<6.0.0",
-    "black>=24.4.2,<25.0.0",
-    "docformatter>=1.7.5,<2.0.0",
     "pyright>=1.1.366,<2.0.0",
-    "flake8>=7.0.0,<8.0.0",
-    "flake8-pyproject>=1.2.3,<2.0.0",
-    "autoflake>=2.3.1,<3.0.0",
+    "ruff>=0.4.8,<0.5.0",
     "bandit>=1.7.8,<2.0.0",
     "pre-commit>=3.7.1,<4.0.0",
     "ipdb>=0.13.13,<0.14.0",
@@ -66,27 +61,24 @@ todo = "todo.main:app"
 [tool.setuptools]
 package-data = { "todo" = ["db/alembic.ini"] }
 
-[tool.isort]
-profile = "black"
-
-[tool.black]
+[tool.ruff]
 line-length = 88
+show-fixes = true
 
-[tool.docformatter]
-in-place = true
-recursive = true
-black = true
-blank = true
+[tool.ruff.lint]
+# TODO: add `isort` & downgrade my local Python version according to requirements
+select = ["F", "E", "C90", "D"]
+ignore = ["D1", "D203", "D213"]
 
-[tool.flake8]
-max-line-length = 88
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.mccabe]
 max-complexity = 8
-ignore = ["E203", "F401", "E701"]
 
-[tool.autoflake]
-recursive = true
-remove-all-unused-imports = true
-ignore-init-module-imports = true
+[tool.ruff.format]
+docstring-code-format = true
+
 
 [tool.bandit]
 exclude_dirs = ["tests"]

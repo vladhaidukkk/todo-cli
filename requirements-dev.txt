@@ -5,29 +5,22 @@ annotated-types==0.7.0
     # via pydantic
 asttokens==2.4.1
     # via stack-data
-autoflake==2.3.1
 bandit==1.7.8
-black==24.4.2
 build==1.2.1
 certifi==2024.6.2
     # via requests
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.3.2
-    # via
-    #   docformatter
-    #   requests
+    # via requests
 click==8.1.7
-    # via
-    #   black
-    #   typer
+    # via typer
 decorator==5.1.1
     # via
     #   ipdb
     #   ipython
 distlib==0.3.8
     # via virtualenv
-docformatter==1.7.5
 docutils==0.21.2
     # via readme-renderer
 executing==2.0.1
@@ -35,9 +28,6 @@ executing==2.0.1
 faker==25.8.0
 filelock==3.14.0
     # via virtualenv
-flake8==7.0.0
-    # via flake8-pyproject
-flake8-pyproject==1.2.3
 identify==2.5.36
     # via pre-commit
 idna==3.7
@@ -49,7 +39,6 @@ iniconfig==2.0.0
 ipdb==0.13.13
 ipython==8.25.0
     # via ipdb
-isort==5.13.2
 jaraco-classes==3.4.0
     # via keyring
 jaraco-context==5.3.0
@@ -68,16 +57,12 @@ markupsafe==2.1.5
     # via mako
 matplotlib-inline==0.1.7
     # via ipython
-mccabe==0.7.0
-    # via flake8
 mdurl==0.1.2
     # via markdown-it-py
 more-itertools==10.2.0
     # via
     #   jaraco-classes
     #   jaraco-functools
-mypy-extensions==1.0.0
-    # via black
 nh3==0.2.17
     # via readme-renderer
 nodeenv==1.9.1
@@ -86,13 +71,10 @@ nodeenv==1.9.1
     #   pyright
 packaging==24.0
     # via
-    #   black
     #   build
     #   pytest
 parso==0.8.4
     # via jedi
-pathspec==0.12.1
-    # via black
 pbr==6.0.0
     # via stevedore
 pexpect==4.9.0
@@ -100,9 +82,7 @@ pexpect==4.9.0
 pkginfo==1.11.1
     # via twine
 platformdirs==4.2.2
-    # via
-    #   black
-    #   virtualenv
+    # via virtualenv
 pluggy==1.5.0
     # via pytest
 pre-commit==3.7.1
@@ -112,17 +92,11 @@ ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
     # via stack-data
-pycodestyle==2.11.1
-    # via flake8
 pydantic==2.7.3
     # via pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
 pydantic-settings==2.3.1
-pyflakes==3.2.0
-    # via
-    #   autoflake
-    #   flake8
 pygments==2.18.0
     # via
     #   ipython
@@ -157,6 +131,7 @@ rich==13.7.1
     #   bandit
     #   twine
     #   typer
+ruff==0.4.8
 shellingham==1.5.4
     # via typer
 six==1.16.0
@@ -182,8 +157,6 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   sqlalchemy
     #   typer
-untokenize==0.1.1
-    # via docformatter
 urllib3==2.2.1
     # via
     #   requests

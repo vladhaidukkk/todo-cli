@@ -202,7 +202,7 @@ def delete(
     task_id: Annotated[
         int,
         Argument(help="ID of the task to delete.", show_default=False),
-    ]
+    ],
 ) -> None:
     with session_factory() as session:
         task = session.get(Task, task_id)

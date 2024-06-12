@@ -48,15 +48,15 @@ health:
 
 # Code Formatting & Linting
 fmt:
-	-isort todo tests
-	-black todo tests
-	-docformatter todo tests
+	-ruff format todo tests
 
 lint:
 	-pyright todo tests
-	-flake8 todo tests
-	-autoflake todo tests
+	-ruff check todo tests
 	-bandit -c pyproject.toml -q -r todo
+
+fix:
+    -ruff check --fix todo tests
 
 # Database Management
 alembic := "alembic -c todo/db/alembic.ini"
