@@ -53,7 +53,6 @@ fmt:
 lint:
 	-pyright todo tests
 	-ruff check todo tests
-	-bandit -c pyproject.toml -q -r todo
 
 fix:
     -ruff check --fix todo tests

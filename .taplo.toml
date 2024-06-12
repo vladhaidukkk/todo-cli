@@ -1,1 +1,4 @@
 include = ["pyproject.toml"]
+
+[formatting]
+align_comments = true

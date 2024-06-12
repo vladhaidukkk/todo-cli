@@ -7,7 +7,7 @@ from todo.config import dev_settings, settings
 from todo.db.core import Base
 
 # isort: split
-import todo.db.models  # noqa
+import todo.db.models  # noqa: F401
 
 config = context.config
 

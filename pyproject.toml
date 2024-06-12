@@ -49,7 +49,6 @@ dev = [
   "faker>=25.8.0,<26.0.0",
   "pyright>=1.1.366,<2.0.0",
   "ruff>=0.4.8,<0.5.0",
-  "bandit>=1.7.8,<2.0.0",
   "pre-commit>=3.7.1,<4.0.0",
   "ipdb>=0.13.13,<0.14.0",
 ]
@@ -66,41 +65,69 @@ show-fixes = true
 
 [tool.ruff.lint]
 select = [
-  # pyflakes
-  "F",
-  # pycodestyle
+  "F",    # pyflakes
   "E",
-  "W",
-  # mccabe
-  "C90",
-  # isort
-  "I",
-  # pydocstyle
-  "D",
-  # pyupgrade
-  "UP",
-  # flake8-annotations
-  "ANN",
+  "W",    # pycodestyle
+  "C90",  # mccabe
+  "I",    # isort
+  "N",    # pep8-naming
+  "D",    # pydocstyle
+  "UP",   # pyupgrade
+  "ANN",  # flake8-annotations
+  "S",    # flake8-bandit
+  "BLE",  # flake8-blind-except
+  "FBT",  # flake8-boolean-trap
+  "B",    # flake8-bugbear
+  "A",    # flake8-builtins
+  "COM",  # flake8-commas
+  "C4",   # flake8-comprehensions
+  "T10",  # flake8-debugger
+  "ISC",  # flake8-implicit-str-concat
+  "PIE",  # flake8-pie
+  "PT",   # flake8-pytest-style
+  "Q",    # flake8-quotes
+  "RSE",  # flake8-raise
+  "RET",  # flake8-return
+  "SLF",  # flake8-self
+  "SIM",  # flake8-simplify
+  "TID",  # flake8-tidy-imports
+  "TCH",  # flake8-type-checking
+  "ARG",  # flake8-unused-arguments
+  "PTH",  # flake8-use-pathlib
+  "ERA",  # eradicate
+  "PGH",  # pygrep-hooks
+  "PL",   # pylint
+  "TRY",  # tryceratops
+  "FLY",  # flynt
+  "PERF", # perflint
+  "RUF",  # ruff
 ]
 ignore = [
-  # Missing docstrings in public objects
-  "D1",
-  # one-blank-line-before-class (incompatible with D211)
-  "D203",
-  # multi-line-summary-second-line (incompatible with D212)
-  "D213",
-  # Missing type annotations for self & cls
-  "ANN1",
+  # ### Intentionally disabled ###
+  "D1",    # Missing docstrings in public objects
+  "ANN1",  # Missing type annotations for self & cls
+  "S101",  # assert
+  "PT011", # pytest-raises-too-broad
+
+  # ### Disabled due to incompatibility with another rule ###
+  "D203", # one-blank-line-before-class
+  "D213", # multi-line-summary-second-line
+
+  # ### Disabled due to possible conflicts with fortammer ###
+  "COM812", # missing-trailing-comma
+  "ISC001", # single-line-implicit-string-concatenation
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+"todo/db/migrations/versions/*" = ["S608"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 8
 
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
 [tool.ruff.format]
 docstring-code-format = true
-
-[tool.bandit]
-exclude_dirs = ["tests"]

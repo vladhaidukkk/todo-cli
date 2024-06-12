@@ -30,7 +30,7 @@ def upgrade() -> None:
                 UPDATE {table} SET updated_at = CURRENT_TIMESTAMP
                 WHERE rowid = NEW.rowid;
             END;
-            """  # nosec
+            """
         )
 
 

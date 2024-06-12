@@ -21,10 +21,3 @@ repos:
         language: system
         types: [ python ]
         stages: [ pre-commit ]
-
-      - id: bandit
-        name: bandit
-        entry: bandit -c pyproject.toml -q
-        language: system
-        types: [ python ]
-        stages: [ pre-commit ]

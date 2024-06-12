@@ -8,7 +8,7 @@ now = datetime.now()
 
 
 @pytest.mark.parametrize(
-    "value, expected",
+    ("value", "expected"),
     [
         ("2024-02-03", date(2024, 2, 3)),
         ("02-03", date(now.year, 2, 3)),
@@ -28,7 +28,7 @@ def test_valid_input_with_custom_format_returns_date() -> None:
 
 
 @pytest.mark.parametrize(
-    "value, expected",
+    ("value", "expected"),
     [
         ("02/03/2024", date(2024, 2, 3)),
         ("02/03", date(now.year, 2, 3)),
@@ -43,7 +43,7 @@ def test_valid_input_with_custom_formats_returns_date(
 
 
 @pytest.mark.parametrize(
-    "value, expected",
+    ("value", "expected"),
     [
         ("2024-02-03", date(2024, 2, 3)),
         ("02-03", date(now.year, 2, 3)),

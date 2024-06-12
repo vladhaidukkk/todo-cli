@@ -2,10 +2,9 @@ import time
 from collections.abc import Generator
 
 import pytest
-from pytest import Config, FixtureRequest, Parser
 
 
-def pytest_addoption(parser: Parser) -> None:
+def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption(
         "--total-duration",
         action="store_true",
@@ -14,10 +13,12 @@ def pytest_addoption(parser: Parser) -> None:
     )
 
 
-def pytest_configure(config: Config) -> None:
+def pytest_configure(config: pytest.Config) -> None:
     if config.getoption("--total-duration"):
 
-        def show_total_duration(request: FixtureRequest) -> Generator[None, None, None]:
+        def show_total_duration(
+            request: pytest.FixtureRequest,
+        ) -> Generator[None, None, None]:
             start = time.perf_counter()
             yield
             elapsed = time.perf_counter() - start
@@ -26,7 +27,7 @@ def pytest_configure(config: Config) -> None:
             divider = "=" * len(output)
 
             cap_manager = request.config.pluginmanager.getplugin("capturemanager")
-            with cap_manager.global_and_fixture_disabled():  # type: ignore
+            with cap_manager.global_and_fixture_disabled():  # type: ignore[reportAttributeAccessIssue]
                 print(f"\n\n{divider}")
                 print(output)
                 print(divider, end="")

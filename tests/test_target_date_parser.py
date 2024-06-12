@@ -21,7 +21,7 @@ def test_valid_input_returns_date(parse_str_to_date_spy: MagicMock) -> None:
 
 
 def test_already_parsed_input_returns_input(parse_str_to_date_spy: MagicMock) -> None:
-    result = target_date_parser(date(2024, 2, 3))  # type: ignore
+    result = target_date_parser(date(2024, 2, 3))  # type: ignore[reportArgumentType]
     assert result == date(2024, 2, 3)
     parse_str_to_date_spy.assert_not_called()
 

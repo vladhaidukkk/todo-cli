@@ -27,6 +27,7 @@ def create_space(
     name: Annotated[
         str, Argument(help="Unique name of the space.", show_default=False)
     ],
+    *,
     description: Annotated[
         Optional[str],
         Option(
@@ -59,7 +60,7 @@ def setup() -> None:
 
 def title_callback(value: str) -> str:
     if not value.strip():
-        raise BadParameter("Only non-empty string is allowed.")
+        raise BadParameter("Only non-empty string is allowed.")  # noqa: TRY003
     return value
 
 
@@ -77,7 +78,7 @@ def parse_str_to_date(value: str, formats: Optional[list[str]] = None) -> date:
             return parsed
 
     joined_formats = ", ".join(f"'{fmt}'" for fmt in formats)
-    raise ValueError(f"'{value}' does not match any of formats: {joined_formats}.")
+    raise ValueError(f"'{value}' does not match any of formats: {joined_formats}.")  # noqa: TRY003
 
 
 def target_date_parser(value: str) -> date:
@@ -88,7 +89,7 @@ def target_date_parser(value: str) -> date:
     try:
         return parse_str_to_date(value)
     except ValueError as exc:
-        raise BadParameter(str(exc))
+        raise BadParameter(str(exc)) from exc
 
 
 @app.command(help="Create a new task.", no_args_is_help=True)
@@ -101,6 +102,7 @@ def add(
             show_default=False,
         ),
     ],
+    *,
     target_date: Annotated[
         Optional[date],
         Option(
@@ -209,12 +211,10 @@ def delete(
         if not task:
             console.print(f"Task [cyan]#{task_id}[/] does not exist.", style="bold red")
             raise Exit(1)
-        else:
-            session.delete(task)
-            session.commit()
-            console.print(
-                f"Task [magenta]#{task.id}[/] was deleted.", style="bold green"
-            )
+
+        session.delete(task)
+        session.commit()
+        console.print(f"Task [magenta]#{task.id}[/] was deleted.", style="bold green")
 
 
 @app.command("list", help="List tasks.")

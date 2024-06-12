@@ -77,7 +77,7 @@ class Settings(BaseSettings):
         if self.config_file.exists():
             with self.config_file.open("rb") as f:
                 # TODO: parse user configurations & pass them to the Config.
-                contents = tomli.load(f)  # noqa
+                contents = tomli.load(f)  # noqa: F841
         return Config()
 
     model_config = SettingsConfigDict(frozen=True)
@@ -95,13 +95,13 @@ class DotenvSettings(BaseSettings):
     debug: bool = False
 
     @classmethod
-    def settings_customise_sources(
+    def settings_customise_sources(  # noqa: PLR0913
         cls,
-        settings_cls: type[BaseSettings],
-        init_settings: PydanticBaseSettingsSource,
-        env_settings: PydanticBaseSettingsSource,
+        settings_cls: type[BaseSettings],  # noqa: ARG003
+        init_settings: PydanticBaseSettingsSource,  # noqa: ARG003
+        env_settings: PydanticBaseSettingsSource,  # noqa: ARG003
         dotenv_settings: PydanticBaseSettingsSource,
-        file_secret_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,  # noqa: ARG003
     ) -> tuple[PydanticBaseSettingsSource, ...]:
         return (dotenv_settings,)
 
