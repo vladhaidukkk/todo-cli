@@ -2,7 +2,6 @@ import os
 import sys
 from functools import cached_property
 from pathlib import Path
-from typing import Type
 
 import tomli
 from pydantic import BaseModel, computed_field
@@ -98,7 +97,7 @@ class DotenvSettings(BaseSettings):
     @classmethod
     def settings_customise_sources(
         cls,
-        settings_cls: Type[BaseSettings],
+        settings_cls: type[BaseSettings],
         init_settings: PydanticBaseSettingsSource,
         env_settings: PydanticBaseSettingsSource,
         dotenv_settings: PydanticBaseSettingsSource,
