@@ -5,6 +5,8 @@ annotated-types==0.7.0
     # via pydantic
 asttokens==2.4.1
     # via stack-data
+backports-tarfile==1.2.0
+    # via jaraco-context
 bandit==1.7.8
 build==1.2.1
 certifi==2024.6.2
@@ -23,6 +25,10 @@ distlib==0.3.8
     # via virtualenv
 docutils==0.21.2
     # via readme-renderer
+exceptiongroup==1.2.1
+    # via
+    #   ipython
+    #   pytest
 executing==2.0.1
     # via stack-data
 faker==25.8.0
@@ -33,11 +39,14 @@ identify==2.5.36
 idna==3.7
     # via requests
 importlib-metadata==7.1.0
-    # via twine
+    # via
+    #   build
+    #   keyring
+    #   twine
 iniconfig==2.0.0
     # via pytest
 ipdb==0.13.13
-ipython==8.25.0
+ipython==8.18.1
     # via ipdb
 jaraco-classes==3.4.0
     # via keyring
@@ -59,7 +68,7 @@ matplotlib-inline==0.1.7
     # via ipython
 mdurl==0.1.2
     # via markdown-it-py
-more-itertools==10.2.0
+more-itertools==10.3.0
     # via
     #   jaraco-classes
     #   jaraco-functools
@@ -69,7 +78,7 @@ nodeenv==1.9.1
     # via
     #   pre-commit
     #   pyright
-packaging==24.0
+packaging==24.1
     # via
     #   build
     #   pytest
@@ -86,7 +95,7 @@ platformdirs==4.2.2
 pluggy==1.5.0
     # via pytest
 pre-commit==3.7.1
-prompt-toolkit==3.0.46
+prompt-toolkit==3.0.47
     # via ipython
 ptyprocess==0.7.0
     # via pexpect
@@ -96,7 +105,7 @@ pydantic==2.7.3
     # via pydantic-settings
 pydantic-core==2.18.4
     # via pydantic
-pydantic-settings==2.3.1
+pydantic-settings==2.3.2
 pygments==2.18.0
     # via
     #   ipython
@@ -144,6 +153,11 @@ stack-data==0.6.3
     # via ipython
 stevedore==5.2.0
     # via bandit
+tomli==2.0.1
+    # via
+    #   build
+    #   ipdb
+    #   pytest
 traitlets==5.14.3
     # via
     #   ipython
@@ -153,6 +167,7 @@ typer==0.12.3
 typing-extensions==4.12.2
     # via
     #   alembic
+    #   ipython
     #   pydantic
     #   pydantic-core
     #   sqlalchemy

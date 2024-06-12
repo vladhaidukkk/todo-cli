@@ -1,10 +1,10 @@
 import os
 import sys
-import tomllib
 from functools import cached_property
 from pathlib import Path
 from typing import Type
 
+import tomli
 from pydantic import BaseModel, computed_field
 from pydantic_settings import (
     BaseSettings,
@@ -78,7 +78,7 @@ class Settings(BaseSettings):
         if self.config_file.exists():
             with self.config_file.open("rb") as f:
                 # TODO: parse user configurations & pass them to the Config.
-                contents = tomllib.load(f)  # noqa
+                contents = tomli.load(f)  # noqa
         return Config()
 
     model_config = SettingsConfigDict(frozen=True)
