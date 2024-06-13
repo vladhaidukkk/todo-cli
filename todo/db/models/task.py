@@ -21,7 +21,7 @@ class Task(Base):
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
     completed_at: Mapped[Optional[datetime]]
-    space_id: Mapped[int] = mapped_column(ForeignKey("spaces.id"))
+    space_id: Mapped[int] = mapped_column(ForeignKey("spaces.id", ondelete="CASCADE"))
 
     space: Mapped["Space"] = relationship(back_populates="tasks")
     assertions: Mapped[list["Assertion"]] = relationship(back_populates="task")

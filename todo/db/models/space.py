@@ -18,4 +18,6 @@ class Space(Base):
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 
-    tasks: Mapped[list["Task"]] = relationship(back_populates="space")
+    tasks: Mapped[list["Task"]] = relationship(
+        back_populates="space", passive_deletes=True
+    )
