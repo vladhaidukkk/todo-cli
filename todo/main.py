@@ -4,6 +4,7 @@ from itertools import count
 from typing import Annotated, Optional
 
 from rich.console import Console
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import select
 from typer import Argument, BadParameter, Exit, Option, Typer, prompt
 
@@ -64,9 +65,16 @@ def delete_space(
             )
             raise Exit(1)
 
-        session.delete(space)
-        session.commit()
-        console.print(f"Task [magenta]#{space.id}[/] was deleted.", style="bold green")
+        try:
+            session.delete(space)
+            session.commit()
+        except IntegrityError as exc:
+            console.print(exc.orig, style="bold red")
+            raise Exit(1) from exc
+        else:
+            console.print(
+                f"Task [magenta]#{space.id}[/] was deleted.", style="bold green"
+            )
 
 
 app.add_typer(spaces_app, name="spaces")
