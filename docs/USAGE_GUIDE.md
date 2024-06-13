@@ -110,6 +110,7 @@ $ todo spaces [OPTIONS] COMMAND [ARGS]...
 **Commands**:
 
 * `add`: Create a new space.
+* `delete`: Delete a space.
 
 ### `todo spaces add`
 
@@ -128,6 +129,24 @@ $ todo spaces add [OPTIONS] NAME
 **Options**:
 
 * `-d, --description TEXT`: Specify a description for the space.
+* `--help`: Show this message and exit.
+
+### `todo spaces delete`
+
+Delete a space.
+
+**Usage**:
+
+```console
+$ todo spaces delete [OPTIONS] SPACE_ID
+```
+
+**Arguments**:
+
+* `SPACE_ID`: ID of the space to delete.  [required]
+
+**Options**:
+
 * `--help`: Show this message and exit.
 
 ## `todo uncomplete`

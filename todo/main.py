@@ -48,6 +48,27 @@ def create_space(
         )
 
 
+@spaces_app.command("delete", help="Delete a space.", no_args_is_help=True)
+def delete_space(
+    space_id: Annotated[
+        int,
+        Argument(help="ID of the space to delete.", show_default=False),
+    ],
+) -> None:
+    with session_factory() as session:
+        space = session.get(Space, space_id)
+        if not space:
+            console.print(
+                f"Space [cyan]#{space_id}[/] does not exist.",
+                style="bold red",
+            )
+            raise Exit(1)
+
+        session.delete(space)
+        session.commit()
+        console.print(f"Task [magenta]#{space.id}[/] was deleted.", style="bold green")
+
+
 app.add_typer(spaces_app, name="spaces")
 
 
