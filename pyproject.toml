@@ -104,10 +104,11 @@ select = [
 ]
 ignore = [
   # ### Intentionally disabled ###
-  "D1",    # Missing docstrings in public objects
-  "ANN1",  # Missing type annotations for self & cls
-  "S101",  # assert
-  "PT011", # pytest-raises-too-broad
+  "D1",     # Missing docstrings in public objects
+  "ANN1",   # Missing type annotations for self & cls
+  "S101",   # assert
+  "FBT001", # boolean-type-hint-positional-argument
+  "PT011",  # pytest-raises-too-broad
 
   # ### Disabled due to incompatibility with another rule ###
   "D203", # one-blank-line-before-class

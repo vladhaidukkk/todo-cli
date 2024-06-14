@@ -1,6 +1,7 @@
 import os
 import sys
 from functools import cached_property
+from importlib import metadata
 from pathlib import Path
 
 import tomli
@@ -22,7 +23,9 @@ class Settings(BaseSettings):
     todo_config_roaming: bool = False
 
     # Constants (must be initialized to have the highest priority).
+    project_name: str
     cli_name: str
+    version: str
     is_win: bool
 
     @computed_field
@@ -83,8 +86,12 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(frozen=True)
 
 
+project_name = "todo-cli-vh"
+project_dist = metadata.distribution(project_name)
 settings = Settings(
-    cli_name="todo",
+    project_name=project_name,
+    cli_name=project_dist.entry_points[0].name,  # type: ignore[reportArgumentType]
+    version=project_dist.version,
     is_win=sys.platform.startswith("win"),
 )
 

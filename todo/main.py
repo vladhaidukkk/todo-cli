@@ -80,8 +80,19 @@ def delete_space(
 app.add_typer(spaces_app, name="spaces")
 
 
+def version_callback(value: bool) -> None:
+    if value:
+        console.print(f"{settings.project_name} {settings.version}", highlight=False)
+        raise Exit
+
+
 @app.callback()
-def setup() -> None:
+def setup(
+    *,
+    _version: Annotated[
+        bool, Option("--version", "-v", callback=version_callback, is_eager=True)
+    ] = False,
+) -> None:
     settings.data_dir.mkdir(parents=True, exist_ok=True)
     settings.db_file.touch(exist_ok=True)
     apply_migrations()
