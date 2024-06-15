@@ -4,10 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from todo.config import dev_settings, settings
-from todo.db.core import Base
-
-# isort: split
-import todo.db.models  # noqa: F401
+from todo.db.models import Base
 
 config = context.config
 

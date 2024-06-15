@@ -4,8 +4,9 @@ from typing import TYPE_CHECKING, Optional
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from todo.db.core import Base
 from todo.db.types import created_at, intpk, updated_at
+
+from .base import Base
 
 if TYPE_CHECKING:
     from .assertion import Assertion
