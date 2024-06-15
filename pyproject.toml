@@ -104,6 +104,7 @@ select = [
 ]
 ignore = [
   # ### Intentionally disabled ###
+  "E501",   # line-too-long
   "D1",     # Missing docstrings in public objects
   "ANN1",   # Missing type annotations for self & cls
   "S101",   # assert

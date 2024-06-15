@@ -98,9 +98,15 @@ def disable_space(
                 f"Space [blue]#{space.id}[/] has already been disabled.",
                 style="bold yellow",
             )
-        else:
+            raise Exit
+
+        try:
             space.disabled_at = datetime.now()
             session.commit()
+        except IntegrityError as exc:
+            console.print(exc.orig, style="bold red")
+            raise Exit(1) from exc
+        else:
             console.print(
                 f"Space [magenta]#{space.id}[/] was disabled.", style="bold green"
             )
