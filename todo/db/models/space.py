@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -18,6 +19,7 @@ class Space(Base):
     description: Mapped[Optional[str]]
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
+    disabled_at: Mapped[Optional[datetime]]
 
     tasks: Mapped[list["Task"]] = relationship(
         back_populates="space", passive_deletes=True

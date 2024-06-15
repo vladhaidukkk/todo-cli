@@ -10,6 +10,7 @@ $ todo [OPTIONS] COMMAND [ARGS]...
 
 **Options**:
 
+* `-v, --version`
 * `--install-completion`: Install completion for the current shell.
 * `--show-completion`: Show completion for the current shell, to copy it or customize the installation.
 * `--help`: Show this message and exit.
@@ -111,6 +112,7 @@ $ todo spaces [OPTIONS] COMMAND [ARGS]...
 
 * `add`: Create a new space.
 * `delete`: Delete a space.
+* `disable`: Disable a space.
 
 ### `todo spaces add`
 
@@ -144,6 +146,24 @@ $ todo spaces delete [OPTIONS] SPACE_ID
 **Arguments**:
 
 * `SPACE_ID`: ID of the space to delete.  [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+### `todo spaces disable`
+
+Disable a space.
+
+**Usage**:
+
+```console
+$ todo spaces disable [OPTIONS] SPACE_ID
+```
+
+**Arguments**:
+
+* `SPACE_ID`: ID of the space to disable.  [required]
 
 **Options**:
 

@@ -77,6 +77,35 @@ def delete_space(
             )
 
 
+@spaces_app.command("disable", help="Disable a space.", no_args_is_help=True)
+def disable_space(
+    space_id: Annotated[
+        int,
+        Argument(help="ID of the space to disable.", show_default=False),
+    ],
+) -> None:
+    with session_factory() as session:
+        space = session.get(Space, space_id)
+        if not space:
+            console.print(
+                f"Space [cyan]#{space_id}[/] does not exist.",
+                style="bold red",
+            )
+            raise Exit(1)
+
+        if space.disabled_at:
+            console.print(
+                f"Space [blue]#{space.id}[/] has already been disabled.",
+                style="bold yellow",
+            )
+        else:
+            space.disabled_at = datetime.now()
+            session.commit()
+            console.print(
+                f"Space [magenta]#{space.id}[/] was disabled.", style="bold green"
+            )
+
+
 app.add_typer(spaces_app, name="spaces")
 
 
