@@ -32,4 +32,4 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    op.execute("DROP TRIGGER prevent_default_space_deletion")
+    op.execute("DROP TRIGGER prevent_default_space_deletion;")

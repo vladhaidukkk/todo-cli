@@ -36,4 +36,4 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     for table in existing_tables:
-        op.execute(f"DROP TRIGGER update_{table}_updated_at")
+        op.execute(f"DROP TRIGGER update_{table}_updated_at;")

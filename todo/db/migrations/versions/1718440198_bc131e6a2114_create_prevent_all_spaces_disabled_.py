@@ -32,4 +32,4 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    op.execute("DROP TRIGGER prevent_all_spaces_disabled")
+    op.execute("DROP TRIGGER prevent_all_spaces_disabled;")

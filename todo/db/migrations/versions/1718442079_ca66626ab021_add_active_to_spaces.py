@@ -28,7 +28,7 @@ def upgrade() -> None:
     )
     # ### end Alembic commands ###
 
-    op.execute("UPDATE spaces SET active = TRUE WHERE id = 1")
+    op.execute("UPDATE spaces SET active = TRUE WHERE id = 1;")
 
 
 def downgrade() -> None:

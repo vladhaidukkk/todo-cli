@@ -19,24 +19,15 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    conn = op.get_bind()
-
-    conn.execute(
-        sa.text(
-            "INSERT INTO spaces (name, description) VALUES (:name, :description)"
-        ).bindparams(
-            name="Default",
-            description="Default space for tasks management",
-        )
+    op.execute(
+        """
+        INSERT INTO spaces (name, description)
+        VALUES ('Default', 'Default space for tasks management');
+        """
     )
-    default_space_id = conn.scalar(sa.text("SELECT id FROM spaces"))
 
     op.add_column("tasks", sa.Column("space_id", sa.Integer(), nullable=True))
-    conn.execute(
-        sa.text("UPDATE tasks SET space_id = :space_id").bindparams(
-            space_id=default_space_id
-        )
-    )
+    op.execute("UPDATE tasks SET space_id = 1;")
 
     with op.batch_alter_table("tasks", recreate="always") as batch_op:
         batch_op.alter_column("space_id", nullable=False)
@@ -52,6 +43,4 @@ def downgrade() -> None:
         batch_op.drop_column("space_id")
         # ### end Alembic commands ###
 
-    op.execute(
-        sa.text("DELETE FROM spaces WHERE name = :name ").bindparams(name="Default")
-    )
+    op.execute("DELETE FROM spaces WHERE id = 1;")
