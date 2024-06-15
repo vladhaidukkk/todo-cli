@@ -110,11 +110,30 @@ $ todo spaces [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
+* `activate`: Activate a space.
 * `add`: Create a new space.
 * `delete`: Delete a space.
 * `disable`: Disable a space.
 * `enable`: Enable a space.
 * `list`: List spaces.
+
+### `todo spaces activate`
+
+Activate a space.
+
+**Usage**:
+
+```console
+$ todo spaces activate [OPTIONS] SPACE_ID
+```
+
+**Arguments**:
+
+* `SPACE_ID`: ID of the space to activate.  [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
 
 ### `todo spaces add`
 
