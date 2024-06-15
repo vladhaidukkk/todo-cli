@@ -22,7 +22,6 @@ def upgrade() -> None:
         """
         CREATE TRIGGER prevent_default_space_deletion
         BEFORE DELETE ON spaces
-        FOR EACH ROW
         WHEN OLD.id = 1
         BEGIN
             SELECT RAISE(FAIL, 'Deletion of the default space is not allowed.');

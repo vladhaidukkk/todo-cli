@@ -25,7 +25,6 @@ def upgrade() -> None:
             f"""
             CREATE TRIGGER update_{table}_updated_at
             BEFORE UPDATE ON {table}
-            FOR EACH ROW
             BEGIN
                 UPDATE {table} SET updated_at = CURRENT_TIMESTAMP
                 WHERE rowid = NEW.rowid;

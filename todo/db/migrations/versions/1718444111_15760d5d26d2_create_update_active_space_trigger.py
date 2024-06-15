@@ -21,8 +21,8 @@ def upgrade() -> None:
     op.execute(
         """
         CREATE TRIGGER update_active_space
-        BEFORE UPDATE ON spaces
-        WHEN NEW.active = TRUE AND OLD.active = FALSE
+        BEFORE UPDATE OF active ON spaces
+        WHEN OLD.active = FALSE AND NEW.active = TRUE
         BEGIN
             UPDATE spaces SET active = FALSE WHERE id != NEW.id AND active = TRUE;
         END;

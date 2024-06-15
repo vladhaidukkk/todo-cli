@@ -25,7 +25,7 @@ def upgrade() -> None:
         WHEN NEW.disabled_at IS NOT NULL
         BEGIN
             SELECT RAISE(FAIL, 'Cannot disable the last enabled space.')
-            WHERE (SELECT COUNT(*) FROM spaces WHERE disabled_at is NULL AND id != NEW.id) = 0;
+            WHERE (SELECT COUNT(*) FROM spaces WHERE disabled_at IS NULL AND id != NEW.id) = 0;
         END;
         """
     )
