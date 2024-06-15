@@ -144,6 +144,15 @@ def enable_space(
         console.print(f"Space [magenta]#{space.id}[/] was enabled.", style="bold green")
 
 
+@spaces_app.command("list", help="List spaces.")
+def list_spaces() -> None:
+    with session_factory() as session:
+        query = select(Space)
+        spaces = session.scalars(query)
+        for space in spaces:
+            console.print(space)
+
+
 app.add_typer(spaces_app, name="spaces")
 
 

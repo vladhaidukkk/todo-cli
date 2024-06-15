@@ -114,6 +114,7 @@ $ todo spaces [OPTIONS] COMMAND [ARGS]...
 * `delete`: Delete a space.
 * `disable`: Disable a space.
 * `enable`: Enable a space.
+* `list`: List spaces.
 
 ### `todo spaces add`
 
@@ -183,6 +184,20 @@ $ todo spaces enable [OPTIONS] SPACE_ID
 **Arguments**:
 
 * `SPACE_ID`: ID of the space to enable.  [required]
+
+**Options**:
+
+* `--help`: Show this message and exit.
+
+### `todo spaces list`
+
+List spaces.
+
+**Usage**:
+
+```console
+$ todo spaces list [OPTIONS]
+```
 
 **Options**:
 
