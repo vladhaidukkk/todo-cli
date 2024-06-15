@@ -1,4 +1,5 @@
 from contextlib import suppress
+from dataclasses import dataclass
 from datetime import date, datetime
 from itertools import count
 from typing import Annotated, Optional
@@ -6,7 +7,7 @@ from typing import Annotated, Optional
 from rich.console import Console
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import select
-from typer import Argument, BadParameter, Exit, Option, Typer, prompt
+from typer import Argument, BadParameter, Context, Exit, Option, Typer, prompt
 
 from todo.config import dev_settings, settings
 from todo.db.core import session_factory
@@ -156,6 +157,17 @@ def list_spaces() -> None:
 app.add_typer(spaces_app, name="spaces")
 
 
+@dataclass
+class State:
+    space_id: int
+
+
+def get_active_space_id() -> int:
+    with session_factory() as session:
+        space = session.query(Space).filter_by(active=True).one()
+    return space.id
+
+
 def version_callback(value: bool) -> None:
     if value:
         console.print(f"{settings.project_name} {settings.version}", highlight=False)
@@ -164,11 +176,13 @@ def version_callback(value: bool) -> None:
 
 @app.callback()
 def setup(
+    ctx: Context,
     *,
     _version: Annotated[
         bool, Option("--version", "-v", callback=version_callback, is_eager=True)
     ] = False,
 ) -> None:
+    ctx.obj = State(space_id=get_active_space_id())
     settings.data_dir.mkdir(parents=True, exist_ok=True)
     settings.db_file.touch(exist_ok=True)
     apply_migrations()
@@ -210,6 +224,7 @@ def target_date_parser(value: str) -> date:
 
 @app.command(help="Create a new task.", no_args_is_help=True)
 def add(
+    ctx: Context,
     title: Annotated[
         str,
         Argument(
@@ -253,7 +268,12 @@ def add(
         assertions = [
             Assertion(title=assertion_title) for assertion_title in assertion_titles
         ]
-        new_task = Task(title=title, target_date=target_date, assertions=assertions)
+        new_task = Task(
+            title=title,
+            target_date=target_date,
+            space_id=ctx.obj.space_id,
+            assertions=assertions,
+        )
         session.add(new_task)
         session.commit()
         console.print(
