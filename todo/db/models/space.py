@@ -9,6 +9,7 @@ from todo.db.types import created_at, intpk, updated_at
 from .base import Base
 
 if TYPE_CHECKING:
+    from .space_history_record import SpaceHistoryRecord
     from .task import Task
 
 
@@ -24,5 +25,8 @@ class Space(Base):
     disabled_at: Mapped[Optional[datetime]]
 
     tasks: Mapped[list["Task"]] = relationship(
+        back_populates="space", passive_deletes=True
+    )
+    history_records: Mapped[list["SpaceHistoryRecord"]] = relationship(
         back_populates="space", passive_deletes=True
     )
