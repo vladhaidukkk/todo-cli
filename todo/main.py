@@ -69,8 +69,8 @@ def delete_space(
             session.delete(space)
             session.commit()
         except IntegrityError as exc:
-            console.print(exc.orig, style="bold red")
-            raise Exit(1) from exc
+            console.print(exc.orig, style="bold yellow")
+            raise Exit from exc
         else:
             console.print(
                 f"Task [magenta]#{space.id}[/] was deleted.", style="bold green"
@@ -100,16 +100,20 @@ def disable_space(
             )
             raise Exit
 
-        try:
-            space.disabled_at = datetime.now()
-            session.commit()
-        except IntegrityError as exc:
-            console.print(exc.orig, style="bold red")
-            raise Exit(1) from exc
-        else:
-            console.print(
-                f"Space [magenta]#{space.id}[/] was disabled.", style="bold green"
-            )
+        else_enabled_spaces_count = (
+            session.query(Space)
+            .filter(Space.id != space.id, Space.disabled_at == None)  # noqa: E711
+            .count()
+        )
+        if else_enabled_spaces_count == 0:
+            console.print("At least one space must be enabled.", style="bold yellow")
+            raise Exit
+
+        space.disabled_at = datetime.now()
+        session.commit()
+        console.print(
+            f"Space [magenta]#{space.id}[/] was disabled.", style="bold green"
+        )
 
 
 @spaces_app.command("enable", help="Enable a space.", no_args_is_help=True)
